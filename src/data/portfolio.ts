@@ -169,46 +169,21 @@ export const portfolioContent: Record<Language, PortfolioData> = {
       paragraphs: [
         "I am a Computer Engineer and backend-focused Full Stack Developer specialized in building reliable software for business operations.",
         "My work centers on translating complex operational workflows into maintainable systems: data modeling, SQL optimization, versioned migrations, API integrations, automated validations, and production-oriented web applications.",
-        "I have experience working with legacy PHP/MySQL systems, Laravel applications, WordPress-based corporate websites, Docker environments, GitLab CI/CD pipelines, and AI-powered workflow automation using OpenAI and Twilio.",
-        "In production environments, I work on traceability, stock, manufacturing, reporting, and quality-control workflows where reliability matters as much as feature delivery.",
+        "I work with legacy PHP/MySQL systems, Laravel applications, WordPress websites, Docker, GitLab CI/CD, and AI-powered automation, with production experience in traceability, stock, manufacturing, and reporting workflows.",
       ],
       quickFacts: [
         { label: "Computer Engineer", icon: "school" },
         { label: "Based in Argentina", icon: "public" },
-        { label: "Backend-focused Full Stack Developer", icon: "code" },
+        { label: "Backend-focused Full Stack", icon: "code" },
         { label: "English & Spanish", icon: "language" },
-        { label: "Traceability and stock systems", icon: "workflow" },
-        { label: "SQL, data modeling, and migrations", icon: "database" },
+        { label: "Traceability & stock", icon: "workflow" },
+        { label: "SQL, modeling & migrations", icon: "database" },
       ],
     },
     expertiseSection: {
       title: "What I'm good at",
     },
-    expertise: [
-      {
-        title: "Business Logic",
-        description: "Turning real-world workflows into maintainable backend systems.",
-        icon: "business",
-      },
-      {
-        title: "Data & SQL",
-        description:
-          "Modeling data, writing reliable queries, and improving data-heavy views.",
-        icon: "data",
-      },
-      {
-        title: "Automation",
-        description:
-          "Reducing manual work through API integrations and workflow automation.",
-        icon: "automation",
-      },
-      {
-        title: "Reliability",
-        description:
-          "Using tests, CI/CD checks, migrations, and documentation to reduce production risk.",
-        icon: "reliability",
-      },
-    ],
+    expertise: [],
     skillsSection: {
       title: "Technical Skills",
     },
@@ -313,25 +288,21 @@ export const portfolioContent: Record<Language, PortfolioData> = {
         type: "Professional Work - Serfe",
         badge: "Operations",
         description:
-          "Develop and maintain critical functionality for a legacy PHP/MySQL intranet used in the daily operations of a dairy company, focused on recipes, lot traceability, input consumption, resulting products, real stock movements, and operational reports.",
+          "Develop and maintain critical functionality for a legacy PHP/MySQL intranet used in daily dairy operations, focused on recipes, lot traceability, input consumption, resulting products, stock movements, and operational reports.",
         focus: [
           "Legacy PHP/MySQL system used in production",
-          "Lot traceability for consumed inputs and resulting products",
-          "Recipes, stock movements, and supply control",
+          "Lot traceability, recipes, stock movements, and supply control",
           "Table design, versioned migrations, and SQL queries",
-          "CI/CD pipeline with unit tests, integration tests, and migration validation",
+          "CI/CD with unit tests, integration tests, and migration validation",
         ],
         tags: [
           "PHP",
           "MySQL",
-          "JavaScript",
           "Legacy Systems",
           "Traceability",
           "Stock",
           "SQL",
-          "Migrations",
           "GitLab CI/CD",
-          "PHPUnit",
         ],
         link: {
           href: "https://www.serfe.com/",
@@ -430,10 +401,10 @@ export const portfolioContent: Record<Language, PortfolioData> = {
         company: "Serfe",
         bullets: [
           "Develop and maintain PHP/MySQL business applications and WordPress websites for external clients.",
-          "Build modules for a dairy production intranet, including recipes, lot traceability, input consumption, resulting products, stock transfers, and supply control.",
-          "Work directly with client stakeholders to analyze operational problems, define technical solutions, implement changes, and validate them before production deployment.",
+          "Build dairy production intranet modules for recipes, lot traceability, stock transfers, and supply control.",
+          "Work with client stakeholders to analyze operational problems, implement changes, and validate releases.",
           "Improve reliability through data modeling, versioned migrations, PHPUnit, integration tests, database schema snapshots, and GitLab CI/CD validation workflows.",
-          "Optimize SQL queries and database indexes for stock, traceability, reporting, and dashboard views.",
+          "Optimize SQL queries and indexes for stock, traceability, and reporting workflows.",
         ],
         current: true,
       },
@@ -486,7 +457,7 @@ export const portfolioContent: Record<Language, PortfolioData> = {
       subtitle:
         "Ingeniero en Informática y Desarrollador Full Stack con foco backend, especializado en PHP/Laravel, SQL, sistemas legacy, automatización, integraciones, CI/CD y aplicaciones web mantenibles.",
       supportingText:
-        "Ayudo a convertir procesos complejos de negocio en software confiable para operaciones reales, con foco en datos, trazabilidad, stock y reducción de riesgos operativos.",
+        "Ayudo a convertir procesos complejos de negocio en software confiable para operaciones reales, con foco en datos, automatización, integraciones y mantenibilidad.",
       tags: [
         { label: "PHP", type: "primary" },
         { label: "Laravel", type: "primary" },
@@ -512,47 +483,21 @@ export const portfolioContent: Record<Language, PortfolioData> = {
       paragraphs: [
         "Soy Ingeniero en Informática y Desarrollador Full Stack con foco backend. Me especializo en construir software confiable para operaciones de negocio.",
         "Mi trabajo se centra en transformar flujos operativos complejos en sistemas mantenibles: modelado de datos, optimización SQL, migraciones versionadas, integraciones con APIs, validaciones automatizadas y aplicaciones web orientadas a producción.",
-        "Tengo experiencia trabajando con sistemas legacy en PHP/MySQL, aplicaciones Laravel, sitios corporativos en WordPress, entornos Docker, pipelines de GitLab CI/CD y automatización de procesos con IA usando OpenAI y Twilio.",
-        "En entornos productivos trabajo sobre trazabilidad, stock, manufactura, reportes y flujos de control de calidad donde la confiabilidad importa tanto como la entrega de funcionalidades.",
+        "Trabajo con sistemas legacy en PHP/MySQL, aplicaciones Laravel, sitios WordPress, Docker, GitLab CI/CD y automatización con IA, con experiencia productiva en trazabilidad, stock, manufactura y reportes.",
       ],
       quickFacts: [
         { label: "Ingeniero en Informática", icon: "school" },
         { label: "Argentina", icon: "public" },
-        { label: "Full Stack con foco backend", icon: "code" },
+        { label: "Full Stack backend", icon: "code" },
         { label: "Inglés y español", icon: "language" },
-        { label: "Sistemas de trazabilidad y stock", icon: "workflow" },
-        { label: "SQL, modelado de datos y migraciones", icon: "database" },
+        { label: "Trazabilidad y stock", icon: "workflow" },
+        { label: "SQL, modelado y migraciones", icon: "database" },
       ],
     },
     expertiseSection: {
       title: "En qué puedo aportar",
     },
-    expertise: [
-      {
-        title: "Lógica de negocio",
-        description:
-          "Convertir procesos reales en sistemas backend mantenibles.",
-        icon: "business",
-      },
-      {
-        title: "Datos y SQL",
-        description:
-          "Modelar datos, escribir consultas confiables y mejorar vistas con alto volumen de información.",
-        icon: "data",
-      },
-      {
-        title: "Automatización",
-        description:
-          "Reducir trabajo manual mediante integraciones con APIs y automatización de flujos.",
-        icon: "automation",
-      },
-      {
-        title: "Confiabilidad",
-        description:
-          "Usar tests, CI/CD, migraciones y documentación para reducir riesgos en producción.",
-        icon: "reliability",
-      },
-    ],
+    expertise: [],
     skillsSection: {
       title: "Habilidades técnicas",
     },
@@ -662,25 +607,21 @@ export const portfolioContent: Record<Language, PortfolioData> = {
         type: "Trabajo profesional - Serfe",
         badge: "Operaciones",
         description:
-          "Desarrollo y mantengo funcionalidades críticas para una intranet legacy PHP/MySQL utilizada en operaciones diarias de una empresa láctea, con foco en recetas, trazabilidad por lote, consumo de insumos, productos obtenidos, movimientos reales de stock y reportes operativos.",
+          "Desarrollo y mantengo funcionalidades críticas para una intranet legacy PHP/MySQL utilizada en operaciones diarias de una empresa láctea, con foco en recetas, trazabilidad por lote, consumo de insumos, productos obtenidos, movimientos de stock y reportes operativos.",
         focus: [
           "Sistema legacy PHP/MySQL utilizado en producción",
-          "Trazabilidad por lote: insumos consumidos y productos obtenidos",
-          "Recetas, movimientos reales de stock y control de insumos",
+          "Trazabilidad por lote, recetas, movimientos de stock y control de insumos",
           "Diseño de tablas, migraciones versionadas y consultas SQL",
-          "Pipeline CI/CD con tests unitarios, integración y validación de migraciones",
+          "CI/CD con tests unitarios, integración y validación de migraciones",
         ],
         tags: [
           "PHP",
           "MySQL",
-          "JavaScript",
           "Sistemas legacy",
           "Trazabilidad",
           "Stock",
           "SQL",
-          "Migraciones",
           "GitLab CI/CD",
-          "PHPUnit",
         ],
         link: {
           href: "https://www.serfe.com/",
@@ -779,10 +720,10 @@ export const portfolioContent: Record<Language, PortfolioData> = {
         company: "Serfe",
         bullets: [
           "Desarrollo y mantengo aplicaciones de negocio en PHP/MySQL y sitios WordPress para clientes externos.",
-          "Construyo módulos para una intranet de producción láctea, incluyendo recetas, trazabilidad por lote, consumo de insumos, productos obtenidos, transferencias de stock y control de insumos.",
-          "Trabajo directamente con referentes del cliente para analizar problemas operativos, diseñar soluciones técnicas, implementar cambios y validarlos antes del paso a producción.",
+          "Construyo módulos para una intranet de producción láctea: recetas, trazabilidad por lote, transferencias de stock y control de insumos.",
+          "Trabajo con referentes del cliente para analizar problemas operativos, implementar cambios y validar releases.",
           "Mejoro la confiabilidad de los sistemas mediante modelado de datos, migraciones versionadas, PHPUnit, tests de integración, snapshots de esquema de base de datos y flujos de validación en GitLab CI/CD.",
-          "Optimizo consultas SQL e índices de base de datos para stock, trazabilidad, reportes y dashboards.",
+          "Optimizo consultas SQL e índices para flujos de stock, trazabilidad y reportes.",
         ],
         current: true,
       },
