@@ -176,8 +176,8 @@ export const portfolioContent: Record<Language, PortfolioData> = {
         { label: "Based in Argentina", icon: "public" },
         { label: "Backend-focused Full Stack", icon: "code" },
         { label: "English & Spanish", icon: "language" },
-        { label: "Data-heavy business systems", icon: "workflow" },
-        { label: "SQL, modeling & migrations", icon: "database" },
+        { label: "Business systems", icon: "workflow" },
+        { label: "Backend, data & automation", icon: "database" },
       ],
     },
     expertiseSection: {
@@ -489,8 +489,8 @@ export const portfolioContent: Record<Language, PortfolioData> = {
         { label: "Argentina", icon: "public" },
         { label: "Full Stack backend", icon: "code" },
         { label: "Inglés y español", icon: "language" },
-        { label: "Sistemas intensivos en datos", icon: "workflow" },
-        { label: "SQL, modelado y migraciones", icon: "database" },
+        { label: "Sistemas de negocio", icon: "workflow" },
+        { label: "Backend, datos y automatización", icon: "database" },
       ],
     },
     expertiseSection: {
