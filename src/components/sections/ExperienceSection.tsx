@@ -1,14 +1,18 @@
-import { portfolioData } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
+import type { PortfolioData } from "@/data/portfolio";
 
-export function ExperienceSection() {
-  const { experience } = portfolioData;
+type ExperienceSectionProps = {
+  data: PortfolioData;
+};
+
+export function ExperienceSection({ data }: ExperienceSectionProps) {
+  const { experience, experienceSection } = data;
 
   return (
     <section id="experience" className="py-24 px-6 bg-surface-container-highest/30 border-y border-border">
       <div className="max-w-[800px] mx-auto">
         <h2 className="text-3xl font-semibold mb-12 text-center text-text-primary">
-          Experience
+          {experienceSection.title}
         </h2>
         
         <div className="relative border-l border-border ml-4 md:ml-0 md:border-none space-y-12">

@@ -1,8 +1,12 @@
 import { Mail, FileText } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import type { PortfolioData } from "@/data/portfolio";
 
-export function ContactSection() {
-  const { contact } = portfolioData;
+type ContactSectionProps = {
+  data: PortfolioData;
+};
+
+export function ContactSection({ data }: ContactSectionProps) {
+  const { contact } = data;
 
   return (
     <section id="contact" className="py-24 px-6">
@@ -19,7 +23,7 @@ export function ContactSection() {
             href={`mailto:${contact.email}`}
             className="bg-primary text-background font-medium px-6 py-3 rounded-md hover:bg-primary-hover transition-all flex items-center gap-2"
           >
-            <Mail className="w-5 h-5" /> Email Me
+            <Mail className="w-5 h-5" /> {data.actions.emailMe}
           </a>
           
           <a 
@@ -46,7 +50,7 @@ export function ContactSection() {
             rel="noopener noreferrer"
             className="bg-transparent border border-primary text-primary font-medium px-6 py-3 rounded-md hover:bg-primary hover:text-background transition-all flex items-center gap-2"
           >
-            <FileText className="w-5 h-5" /> Resume
+            <FileText className="w-5 h-5" /> {data.actions.resume}
           </a>
         </div>
       </div>

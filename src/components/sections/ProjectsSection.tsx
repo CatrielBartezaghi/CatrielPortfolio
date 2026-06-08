@@ -1,22 +1,25 @@
 import { ArrowUpRight, FileText } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import type { PortfolioData } from "@/data/portfolio";
 
-export function ProjectsSection() {
-  const { projects } = portfolioData;
+type ProjectsSectionProps = {
+  data: PortfolioData;
+};
+
+export function ProjectsSection({ data }: ProjectsSectionProps) {
+  const { projects, projectsSection } = data;
 
   return (
     <section id="projects" className="relative overflow-hidden py-24 px-6">
       <div className="max-w-[1120px] mx-auto">
         <div className="mb-12 max-w-2xl">
           <span className="mb-2 block font-mono text-sm font-medium uppercase tracking-widest text-primary">
-            Portfolio
+            {projectsSection.eyebrow}
           </span>
           <h2 className="mb-4 bg-gradient-to-br from-text-primary to-primary bg-clip-text text-4xl font-bold tracking-tight text-transparent md:text-5xl">
-            Featured Projects
+            {projectsSection.title}
           </h2>
           <p className="text-lg leading-relaxed text-text-secondary">
-            A selection of engineering work focused on reliable business systems,
-            automation, financial tooling, and applied machine learning.
+            {projectsSection.description}
           </p>
         </div>
 
@@ -47,7 +50,7 @@ export function ProjectsSection() {
               {project.focus && project.focus.length > 0 && (
                 <div className="mb-6 flex-grow">
                   <p className="mb-3 text-sm font-semibold text-text-primary">
-                    Focus:
+                    {projectsSection.focusLabel}:
                   </p>
                   <ul className="space-y-1">
                     {project.focus.map((item, i) => (

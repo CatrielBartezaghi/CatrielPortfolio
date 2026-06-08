@@ -1,9 +1,13 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import type { PortfolioData } from "@/data/portfolio";
 
-export function HeroSection() {
-  const { hero } = portfolioData;
+type HeroSectionProps = {
+  data: PortfolioData;
+};
+
+export function HeroSection({ data }: HeroSectionProps) {
+  const { hero } = data;
 
   return (
     <section className="hero-gradient pt-32 pb-24 px-6 relative overflow-hidden">
@@ -46,15 +50,15 @@ export function HeroSection() {
               href="#projects"
               className="bg-primary text-background font-medium px-6 py-3 rounded-md hover:bg-primary-hover transition-all flex items-center gap-2"
             >
-              View Projects <ArrowRight className="w-5 h-5" />
+              {data.actions.viewProjects} <ArrowRight className="w-5 h-5" />
             </a>
             <a 
-              href={portfolioData.contact.links.resume}
+              href={data.contact.links.resume}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-surface-elevated border border-border text-text-primary font-medium px-6 py-3 rounded-md hover:border-primary hover:text-primary transition-all"
             >
-              Download Resume
+              {data.actions.downloadResume}
             </a>
           </div>
         </div>
@@ -66,7 +70,7 @@ export function HeroSection() {
             <div className="relative w-full h-full">
               <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoAfD31FaeU2uVFcv_SPv3IRHZjIZnHrCUBmMcAQQXu8StWZMKpqx_b9OD-_KEuF5A75G6C8HqoQotTuhZygUZ872YJk7KAHKVK0d-vnn54qHOFy93Oq09xnuZh-gExY3aQvObfNsprecyK6ZyodkAu7HN0TA-dWLLZ8nCi5Po-TAQv9BWoIIRAEt3wbLydAw9Y1jF5epKbTL-qZveSTVIusACKyjc2UjxDl5xPvLjY-6YwLC28VAup0MIDSGW2oQcowfdBljnddg"
-                alt="Code editor abstract representation"
+                alt={hero.imageAlt}
                 fill
                 unoptimized
                 sizes="(min-width: 768px) 448px, 0px"

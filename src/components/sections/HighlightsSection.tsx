@@ -1,13 +1,17 @@
-import { portfolioData } from "@/data/portfolio";
+import type { PortfolioData } from "@/data/portfolio";
 
-export function HighlightsSection() {
-  const { highlights } = portfolioData;
+type HighlightsSectionProps = {
+  data: PortfolioData;
+};
+
+export function HighlightsSection({ data }: HighlightsSectionProps) {
+  const { highlights, highlightsSection } = data;
 
   return (
     <section id="highlights" className="py-24 px-6 bg-background">
       <div className="max-w-[1120px] mx-auto">
         <h2 className="text-3xl font-semibold mb-12 text-center text-text-primary">
-          Engineering Highlights
+          {highlightsSection.title}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {highlights.map((item, idx) => (

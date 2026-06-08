@@ -1,14 +1,18 @@
-import { portfolioData } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
+import type { PortfolioData } from "@/data/portfolio";
 
-export function SkillsSection() {
-  const { skills } = portfolioData;
+type SkillsSectionProps = {
+  data: PortfolioData;
+};
+
+export function SkillsSection({ data }: SkillsSectionProps) {
+  const { skills, skillsSection } = data;
 
   return (
     <section id="skills" className="py-24 px-6 bg-surface-container-highest/50 border-y border-border">
       <div className="max-w-[1120px] mx-auto">
         <h2 className="text-3xl font-semibold mb-12 text-center text-text-primary">
-          Technical Skills
+          {skillsSection.title}
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {skills.map((skillGroup, idx) => (
