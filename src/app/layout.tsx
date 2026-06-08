@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+const siteUrl = "https://catriel.dev";
+const siteTitle = "Catriel Bartezaghi | Backend-Focused Full Stack Developer";
+const siteDescription =
+  "Computer Engineer and backend-focused Full Stack Developer in Argentina, building reliable business software with PHP, Laravel, SQL, automation, integrations, and CI/CD.";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -13,13 +18,40 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Catriel Bartezaghi - Software Developer",
-  description: "Portfolio of Catriel Bartezaghi, a Computer Engineer and Software Developer focused on backend logic, web applications, automation, and maintainable business systems.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  applicationName: "Catriel Bartezaghi Portfolio",
+  authors: [{ name: "Catriel Bartezaghi", url: siteUrl }],
+  creator: "Catriel Bartezaghi",
+  publisher: "Catriel Bartezaghi",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "Catriel Bartezaghi - Software Developer",
-    description: "Backend-oriented software developer building reliable web applications, internal tools, and automation solutions.",
+    title: siteTitle,
+    description: siteDescription,
+    url: "/",
+    siteName: "Catriel Bartezaghi",
+    locale: "en_US",
     type: "website",
-  }
+  },
+  twitter: {
+    card: "summary",
+    title: siteTitle,
+    description: siteDescription,
+  },
 };
 
 export default function RootLayout({
