@@ -64,7 +64,7 @@ export function HeroSection({ data }: HeroSectionProps) {
         </div>
         
         <div className="hidden md:block relative z-10">
-          <div className="glass-card rounded-2xl p-1.5 aspect-square max-w-[520px] ml-auto relative overflow-hidden shadow-[0_24px_80px_rgba(56,189,248,0.14)]">
+          <div className="glass-card rounded-2xl p-1.5 aspect-square max-w-[460px] ml-auto relative overflow-hidden shadow-[0_16px_40px_rgba(56,189,248,0.05)] opacity-95">
             <div className="relative w-full h-full overflow-hidden rounded-xl">
               <Image
                 src="/image-header.png"
@@ -73,7 +73,7 @@ export function HeroSection({ data }: HeroSectionProps) {
                 priority
                 unoptimized
                 sizes="(min-width: 1024px) 496px, (min-width: 768px) 448px, 0px"
-                className="object-cover"
+                className="object-cover brightness-75 saturate-90"
               />
             </div>
           </div>
