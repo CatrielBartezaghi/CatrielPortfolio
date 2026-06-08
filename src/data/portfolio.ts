@@ -155,7 +155,7 @@ export const portfolioContent: Record<Language, PortfolioData> = {
         { label: "Next.js", type: "secondary" },
         { label: "FastAPI", type: "secondary" },
       ],
-      imageAlt: "Code editor abstract representation",
+      imageAlt: "Business systems architecture illustration",
     },
     actions: {
       viewProjects: "View Projects",
@@ -263,7 +263,7 @@ export const portfolioContent: Record<Language, PortfolioData> = {
       {
         title: "Legacy Modernization",
         description:
-          "Modernized legacy interfaces from Bootstrap 2 and jQuery 1.7 to Bootstrap 5 and jQuery 3.x.",
+          "Modernized interfaces within a legacy system from Bootstrap 2 and jQuery 1.7 to Bootstrap 5 and jQuery 3.x.",
         keywords: ["Bootstrap", "jQuery", "Maintainability"],
         icon: LayoutTemplate,
       },
@@ -468,7 +468,7 @@ export const portfolioContent: Record<Language, PortfolioData> = {
         { label: "Next.js", type: "secondary" },
         { label: "FastAPI", type: "secondary" },
       ],
-      imageAlt: "Representación abstracta de un editor de código",
+      imageAlt: "Ilustración de arquitectura de sistemas de negocio",
     },
     actions: {
       viewProjects: "Ver proyectos",
@@ -581,7 +581,7 @@ export const portfolioContent: Record<Language, PortfolioData> = {
       {
         title: "Modernización legacy",
         description:
-          "Modernicé interfaces legacy desde Bootstrap 2 y jQuery 1.7 a Bootstrap 5 y jQuery 3.x.",
+          "Modernicé interfaces dentro de un sistema legacy desde Bootstrap 2 y jQuery 1.7 a Bootstrap 5 y jQuery 3.x.",
         keywords: ["Bootstrap", "jQuery", "Mantenibilidad"],
         icon: LayoutTemplate,
       },
