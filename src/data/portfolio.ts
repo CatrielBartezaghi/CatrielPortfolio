@@ -167,9 +167,9 @@ export const portfolioContent: Record<Language, PortfolioData> = {
       title: "About Me",
       quickFactsTitle: "Quick Facts",
       paragraphs: [
-        "I am a Computer Engineer and backend-focused Full Stack Developer specialized in building reliable software for business operations.",
+        "I am a Computer Engineer and backend-focused Full Stack Developer specialized in turning business rules, data, and operational processes into maintainable backend systems.",
         "My work centers on translating complex operational workflows into maintainable systems: data modeling, SQL optimization, versioned migrations, API integrations, automated validations, and production-oriented web applications.",
-        "I work with legacy PHP/MySQL systems, Laravel applications, WordPress websites, Docker, GitLab CI/CD, and AI-powered automation, with production experience in operational workflows involving manufacturing, inventory, traceability, and reporting.",
+        "I work with legacy PHP/MySQL systems, Laravel applications, WordPress websites, Docker, GitLab CI/CD, and AI-powered automation, with experience in production systems, operational workflows, and data-oriented applications.",
       ],
       quickFacts: [
         { label: "Computer Engineer", icon: "school" },
@@ -423,7 +423,7 @@ export const portfolioContent: Record<Language, PortfolioData> = {
     contact: {
       headline: "Interested in building reliable software for business processes?",
       description:
-        "I'm open to backend-focused full stack roles involving business logic, legacy modernization, data-intensive systems, automation, integrations, and maintainable web applications.",
+        "I'm open to backend-focused full stack roles involving business logic, data-intensive systems, legacy modernization, automation, and integrations.",
       email: "catriel.barte@gmail.com",
       links: {
         linkedin: "https://linkedin.com/in/catrielbartezaghi/",
@@ -480,9 +480,9 @@ export const portfolioContent: Record<Language, PortfolioData> = {
       title: "Sobre mí",
       quickFactsTitle: "Datos rápidos",
       paragraphs: [
-        "Soy Ingeniero en Informática y Desarrollador Full Stack con foco backend. Me especializo en construir software confiable para operaciones de negocio.",
+        "Soy Ingeniero en Informática y Desarrollador Full Stack con foco backend. Me especializo en convertir reglas de negocio, datos y procesos operativos en sistemas backend mantenibles.",
         "Mi trabajo se centra en transformar flujos operativos complejos en sistemas mantenibles: modelado de datos, optimización SQL, migraciones versionadas, integraciones con APIs, validaciones automatizadas y aplicaciones web orientadas a producción.",
-        "Trabajo con sistemas legacy en PHP/MySQL, aplicaciones Laravel, sitios WordPress, Docker, GitLab CI/CD y automatización con IA, con experiencia productiva en flujos operativos de manufactura, inventario, trazabilidad y reportes.",
+        "Trabajo con sistemas legacy en PHP/MySQL, aplicaciones Laravel, sitios WordPress, Docker, GitLab CI/CD y automatización con IA, con experiencia en sistemas productivos, flujos operativos y aplicaciones orientadas a datos.",
       ],
       quickFacts: [
         { label: "Ingeniero en Informática", icon: "school" },
@@ -741,7 +741,7 @@ export const portfolioContent: Record<Language, PortfolioData> = {
     contact: {
       headline: "¿Te interesa construir software confiable para procesos de negocio?",
       description:
-        "Estoy abierto a roles full stack con foco backend, especialmente en proyectos relacionados con lógica de negocio, modernización legacy, sistemas intensivos en datos, automatización, integraciones y aplicaciones web mantenibles.",
+        "Estoy abierto a roles full stack con foco backend, especialmente en proyectos relacionados con lógica de negocio, sistemas intensivos en datos, modernización legacy, automatización e integraciones.",
       email: "catriel.barte@gmail.com",
       links: {
         linkedin: "https://linkedin.com/in/catrielbartezaghi/",
