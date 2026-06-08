@@ -5,7 +5,7 @@ import "./globals.css";
 const siteUrl = "https://catriel.dev";
 const siteTitle = "Catriel Bartezaghi | Backend-Focused Full Stack Developer";
 const siteDescription =
-  "Computer Engineer and backend-focused Full Stack Developer in Argentina, building reliable business software with PHP, Laravel, SQL, automation, integrations, and CI/CD.";
+  "Computer Engineer and backend-focused Full Stack Developer in Argentina, building reliable business software for legacy systems, traceability, stock, SQL-heavy workflows, automation, integrations, and CI/CD.";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
