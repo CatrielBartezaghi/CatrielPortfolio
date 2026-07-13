@@ -6,53 +6,55 @@ type HeroSectionProps = {
   data: PortfolioData;
 };
 
+type HeroTagsProps = {
+  tags: PortfolioData["hero"]["tags"];
+  className: string;
+};
+
+function HeroTags({ tags, className }: HeroTagsProps) {
+  return (
+    <div className={className}>
+      {tags.map((tag, idx) => (
+        <span
+          key={idx}
+          className={
+            tag.type === "primary"
+              ? "bg-primary-soft text-primary font-mono text-sm px-3 py-1 rounded-full border border-primary/20"
+              : "bg-secondary-soft text-secondary font-mono text-sm px-3 py-1 rounded-full border border-secondary/20"
+          }
+        >
+          {tag.label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export function HeroSection({ data }: HeroSectionProps) {
   const { hero } = data;
 
   return (
-    <section className="hero-gradient pt-32 pb-24 px-6 relative overflow-hidden">
-      <div className="max-w-[1120px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <section className="hero-gradient pt-28 pb-16 px-6 relative overflow-hidden">
+      <div className="max-w-[1280px] mx-auto grid md:grid-cols-2 lg:grid-cols-[3fr_2fr] gap-12 lg:gap-16 items-start">
         <div className="z-10">
-          <div className="flex flex-wrap gap-2 mb-6">
-            {hero.tags.map((tag, idx) => {
-              if (tag.type === "primary") {
-                return (
-                  <span key={idx} className="bg-primary-soft text-primary font-mono text-sm px-3 py-1 rounded-full border border-primary/20">
-                    {tag.label}
-                  </span>
-                );
-              }
-              if (tag.type === "secondary") {
-                return (
-                  <span key={idx} className="bg-secondary-soft text-secondary font-mono text-sm px-3 py-1 rounded-full border border-secondary/20">
-                    {tag.label}
-                  </span>
-                );
-              }
-              return (
-                <span key={idx} className="bg-surface-elevated text-text-secondary font-mono text-sm px-3 py-1 rounded-full border border-border flex items-center gap-1">
-                  {tag.label}
-                </span>
-              );
-            })}
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-text-primary tracking-tight leading-tight">
+          <HeroTags tags={hero.tags} className="mb-5 flex flex-wrap gap-2 md:hidden" />
+          <h1 className="text-5xl lg:text-6xl font-bold mb-5 max-w-[760px] text-text-primary tracking-tight leading-tight">
             {hero.headline}
           </h1>
           <p className="text-xl text-text-secondary mb-6 max-w-2xl leading-relaxed">
             {hero.subtitle}
           </p>
-          <p className="text-lg text-text-muted mb-10 max-w-2xl leading-relaxed">
+          <p className="text-lg text-text-muted mb-8 max-w-2xl leading-relaxed">
             {hero.supportingText}
           </p>
           <div className="flex flex-wrap gap-4">
-            <a 
+            <a
               href="#projects"
               className="bg-primary text-background font-medium px-6 py-3 rounded-md hover:bg-primary-hover transition-all flex items-center gap-2"
             >
               {data.actions.viewProjects} <ArrowRight className="w-5 h-5" />
             </a>
-            <a 
+            <a
               href={data.contact.links.resume}
               target="_blank"
               rel="noopener noreferrer"
@@ -62,21 +64,27 @@ export function HeroSection({ data }: HeroSectionProps) {
             </a>
           </div>
         </div>
-        
-        <div className="hidden md:block relative z-10">
-          <div className="glass-card rounded-2xl p-1.5 aspect-square max-w-[460px] ml-auto relative overflow-hidden shadow-[0_16px_40px_rgba(56,189,248,0.05)] opacity-95">
-            <div className="relative w-full h-full overflow-hidden rounded-xl">
+
+        <div className="hidden md:flex relative z-10 flex-col items-center pt-8">
+          <div className="relative aspect-square w-full max-w-[420px] grid place-items-center">
+            <div
+              aria-hidden="true"
+              className="absolute inset-[4%] rounded-full bg-[radial-gradient(circle_at_50%_35%,rgba(56,189,248,0.22),rgba(167,139,250,0.08)_55%,transparent_72%)] blur-2xl"
+            />
+            <div aria-hidden="true" className="absolute inset-[3%] rounded-full border border-primary/15" />
+            <div aria-hidden="true" className="absolute inset-[9%] rounded-full border border-secondary/20" />
+            <div className="relative w-[84%] aspect-square overflow-hidden rounded-full border-2 border-primary/30 bg-surface-elevated shadow-[0_20px_60px_rgba(56,189,248,0.18)]">
               <Image
-                src="/image-header.png"
+                src="/me.jfif"
                 alt={hero.imageAlt}
                 fill
                 priority
-                unoptimized
-                sizes="(min-width: 1024px) 496px, (min-width: 768px) 448px, 0px"
-                className="object-cover brightness-75 saturate-90"
+                sizes="(min-width: 1024px) 352px, (min-width: 768px) 310px, 0px"
+                className="object-cover"
               />
             </div>
           </div>
+          <HeroTags tags={hero.tags} className="mt-6 flex max-w-[440px] flex-wrap justify-center gap-2" />
         </div>
       </div>
     </section>

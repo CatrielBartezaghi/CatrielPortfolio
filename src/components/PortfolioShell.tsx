@@ -5,9 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { ExpertiseSection } from "@/components/sections/ExpertiseSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
-import { HighlightsSection } from "@/components/sections/HighlightsSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -67,13 +65,11 @@ export function PortfolioShell() {
   return (
     <>
       <Navbar data={data} language={language} onLanguageChange={setStoredLanguage} />
-      <main className="flex-grow pt-24">
+      <main className="flex-grow">
         <HeroSection data={data} />
         <AboutSection data={data} />
         <ProjectsSection data={data} />
-        <ExpertiseSection data={data} />
         <SkillsSection data={data} />
-        <HighlightsSection data={data} />
         <ExperienceSection data={data} />
         <ContactSection data={data} />
       </main>

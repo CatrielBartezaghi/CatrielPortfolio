@@ -13,7 +13,7 @@ export function Navbar({ data, language, onLanguageChange }: NavbarProps) {
 
   return (
     <header className="bg-surface/80 dark:bg-surface/80 backdrop-blur-lg fixed top-0 w-full z-50 border-b border-border">
-      <div className="max-w-[1120px] mx-auto flex justify-between items-center gap-3 px-6 py-4">
+      <div className="max-w-[1280px] mx-auto flex justify-between items-center gap-3 px-6 py-4">
         <Link href="/" className="flex min-w-0 items-center gap-2 text-xl sm:text-2xl font-bold text-text-primary tracking-tight">
           <Terminal className="text-primary w-7 h-7 shrink-0" />
           <span className="truncate">{data.hero.name}</span>
