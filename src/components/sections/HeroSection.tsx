@@ -1,90 +1,43 @@
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import type { PortfolioData } from "@/data/portfolio";
+import Image from 'next/image';
+import { ArrowRight, Check } from 'lucide-react';
+import type { PortfolioData } from '@/data/portfolio';
 
-type HeroSectionProps = {
-  data: PortfolioData;
-};
-
-type HeroTagsProps = {
-  tags: PortfolioData["hero"]["tags"];
-  className: string;
-};
-
-function HeroTags({ tags, className }: HeroTagsProps) {
+export function HeroSection({ data }: { data: PortfolioData }) {
   return (
-    <div className={className}>
-      {tags.map((tag, idx) => (
-        <span
-          key={idx}
-          className={
-            tag.type === "primary"
-              ? "bg-primary-soft text-primary font-mono text-sm px-3 py-1 rounded-full border border-primary/20"
-              : "bg-secondary-soft text-secondary font-mono text-sm px-3 py-1 rounded-full border border-secondary/20"
-          }
-        >
-          {tag.label}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-export function HeroSection({ data }: HeroSectionProps) {
-  const { hero } = data;
-
-  return (
-    <section className="hero-gradient pt-28 pb-16 px-6 relative overflow-hidden">
-      <div className="max-w-[1280px] mx-auto grid md:grid-cols-2 lg:grid-cols-[3fr_2fr] gap-12 lg:gap-16 items-start">
-        <div className="z-10">
-          <HeroTags tags={hero.tags} className="mb-5 flex flex-wrap gap-2 md:hidden" />
-          <h1 className="text-5xl lg:text-6xl font-bold mb-5 max-w-[760px] text-text-primary tracking-tight leading-tight">
-            {hero.headline}
+    <section className='hero-gradient relative overflow-hidden px-6 pb-20 pt-32 sm:pt-36 lg:pb-28'>
+      <div className='mx-auto grid max-w-[1200px] items-center gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:gap-20'>
+        <div className='relative z-10'>
+          <p className='mb-5 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-primary'>{data.hero.eyebrow}</p>
+          <h1 className='max-w-[820px] text-balance text-5xl font-bold leading-[1.04] tracking-[-0.045em] text-text-primary sm:text-6xl lg:text-7xl'>
+            {data.hero.headline}
           </h1>
-          <p className="text-xl text-text-secondary mb-6 max-w-2xl leading-relaxed">
-            {hero.subtitle}
-          </p>
-          <p className="text-lg text-text-muted mb-8 max-w-2xl leading-relaxed">
-            {hero.supportingText}
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="#projects"
-              className="bg-primary text-background font-medium px-6 py-3 rounded-md hover:bg-primary-hover transition-all flex items-center gap-2"
-            >
-              {data.actions.viewProjects} <ArrowRight className="w-5 h-5" />
+          <p className='mt-7 max-w-3xl text-xl leading-relaxed text-text-secondary sm:text-2xl'>{data.hero.subtitle}</p>
+          <p className='mt-4 max-w-2xl text-base leading-relaxed text-text-muted sm:text-lg'>{data.hero.supportingText}</p>
+
+          <ul className='mt-7 flex flex-wrap gap-x-6 gap-y-3' aria-label='Core capabilities'>
+            {data.hero.proofPoints.map((point) => (
+              <li key={point} className='flex items-center gap-2 text-sm font-medium text-text-secondary'>
+                <span className='grid h-5 w-5 place-items-center rounded-full bg-success-soft text-success'><Check className='h-3.5 w-3.5' /></span>
+                {point}
+              </li>
+            ))}
+          </ul>
+
+          <div className='mt-9 flex flex-wrap gap-3'>
+            <a href='#work' className='focus-ring inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 font-semibold text-background transition-colors hover:bg-primary-hover'>
+              {data.actions.viewWork}<ArrowRight className='h-4 w-4' />
             </a>
-            <a
-              href={data.contact.links.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-surface-elevated border border-border text-text-primary font-medium px-6 py-3 rounded-md hover:border-primary hover:text-primary transition-all"
-            >
-              {data.actions.downloadResume}
+            <a href={data.contact.links.resume} target='_blank' rel='noreferrer' className='focus-ring inline-flex items-center rounded-lg border border-border bg-surface px-5 py-3 font-semibold text-text-primary transition-colors hover:border-primary/60 hover:text-primary'>
+              {data.actions.downloadResume}<span className='sr-only'>, {data.actions.openExternal}</span>
             </a>
           </div>
         </div>
 
-        <div className="hidden md:flex relative z-10 flex-col items-center pt-8">
-          <div className="relative aspect-square w-full max-w-[420px] grid place-items-center">
-            <div
-              aria-hidden="true"
-              className="absolute inset-[4%] rounded-full bg-[radial-gradient(circle_at_50%_35%,rgba(56,189,248,0.22),rgba(167,139,250,0.08)_55%,transparent_72%)] blur-2xl"
-            />
-            <div aria-hidden="true" className="absolute inset-[3%] rounded-full border border-primary/15" />
-            <div aria-hidden="true" className="absolute inset-[9%] rounded-full border border-secondary/20" />
-            <div className="relative w-[84%] aspect-square overflow-hidden rounded-full border-2 border-primary/30 bg-surface-elevated shadow-[0_20px_60px_rgba(56,189,248,0.18)]">
-              <Image
-                src="/me.jfif"
-                alt={hero.imageAlt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 352px, (min-width: 768px) 310px, 0px"
-                className="object-cover"
-              />
-            </div>
+        <div className='relative mx-auto hidden lg:block lg:w-[390px] lg:translate-x-8 lg:translate-y-4 lg:justify-self-end'>
+          <div aria-hidden='true' className='absolute -inset-10 rounded-full bg-primary/15 blur-3xl' />
+          <div className='relative aspect-square overflow-hidden rounded-full shadow-[0_24px_70px_rgba(0,0,0,0.36)]'>
+            <Image src='/me.jfif' alt={data.hero.imageAlt} fill priority sizes='390px' className='scale-[1.01] object-cover' />
           </div>
-          <HeroTags tags={hero.tags} className="mt-6 flex max-w-[440px] flex-wrap justify-center gap-2" />
         </div>
       </div>
     </section>

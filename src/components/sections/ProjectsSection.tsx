@@ -1,97 +1,101 @@
-import { ArrowUpRight, FileText } from "lucide-react";
-import type { PortfolioData } from "@/data/portfolio";
+import Link from 'next/link';
+import { ArrowRight, CheckCircle2, CircleAlert, GitBranch, ShieldCheck } from 'lucide-react';
+import { SectionHeading } from '@/components/SectionHeading';
+import type { CaseStudy, Language, PortfolioData } from '@/data/portfolio';
 
-type ProjectsSectionProps = {
-  data: PortfolioData;
-};
+function TechnologyList({ items }: { items: string[] }) {
+  return <ul className='flex flex-wrap gap-2'>{items.map((item) => <li key={item} className='tech-tag'>{item}</li>)}</ul>;
+}
 
-export function ProjectsSection({ data }: ProjectsSectionProps) {
-  const { projects, projectsSection } = data;
+function ProjectStatus({ status }: { status?: string }) {
+  if (!status) return null;
+
+  return <span className='inline-flex rounded-full border border-secondary/30 bg-secondary-soft px-2.5 py-1 font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-secondary'>{status}</span>;
+}
+
+const insightIcons = { problem: CircleAlert, decision: GitBranch, result: ShieldCheck };
+
+function FeaturedSummary({ project }: { project: CaseStudy }) {
+  if (!project.featuredSummary) return null;
 
   return (
-    <section id="projects" className="relative overflow-hidden py-24 px-6">
-      <div className="max-w-[1120px] mx-auto">
-        <div className="mb-12 max-w-2xl">
-          <span className="mb-2 block font-mono text-sm font-medium uppercase tracking-widest text-primary">
-            {projectsSection.eyebrow}
-          </span>
-          <h2 className="mb-4 bg-gradient-to-br from-text-primary to-primary bg-clip-text text-4xl font-bold tracking-tight text-transparent md:text-5xl">
-            {projectsSection.title}
-          </h2>
-          <p className="text-lg leading-relaxed text-text-secondary">
-            {projectsSection.description}
-          </p>
-        </div>
+    <div className='flex h-full flex-col justify-center'>
+      <p className='font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary'>{project.featuredSummary.eyebrow}</p>
+      <h4 className='mt-3 max-w-md text-2xl font-bold tracking-tight text-text-primary'>{project.featuredSummary.title}</h4>
+      <div className='mt-7 space-y-3'>
+        {project.featuredSummary.items.map((item) => {
+          const Icon = insightIcons[item.kind];
+          return (
+            <div key={item.label} className='rounded-xl border border-border bg-surface/65 p-5'>
+              <div className='flex items-center gap-2 text-primary'><Icon className='h-4 w-4' /><p className='font-mono text-xs font-semibold uppercase tracking-wider'>{item.label}</p></div>
+              <p className='mt-3 text-sm leading-relaxed text-text-secondary'>{item.text}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {projects.map((project, idx) => (
-            <article
-              key={idx}
-              className="glass-card group flex h-full flex-col overflow-hidden rounded-xl p-6 transition-all hover:-translate-y-1 md:p-8"
-            >
-              <div className="mb-6 flex items-start justify-between gap-4">
-                <div>
-                  <span className="mb-3 inline-flex rounded-full border border-border bg-background/60 px-3 py-1 font-mono text-xs font-medium uppercase tracking-wider text-text-primary">
-                    {project.badge}
-                  </span>
-                  <p className="mb-1 font-mono text-xs font-medium uppercase tracking-wider text-primary">
-                    {project.type}
-                  </p>
-                  <h3 className="text-2xl font-semibold text-text-primary transition-colors group-hover:text-primary">
-                    {project.title}
-                  </h3>
-                </div>
+function SecondaryCase({ project, data, language }: { project: CaseStudy; data: PortfolioData; language: Language }) {
+  return (
+    <article className='case-card group flex h-full flex-col p-6 sm:p-7'>
+      <p className='font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary'>{project.category}</p>
+      <div className='mt-2 flex flex-wrap items-center gap-2'>
+        <p className='text-sm text-text-muted'>{project.employer}</p>
+        <ProjectStatus status={project.status} />
+      </div>
+      <h3 className='mt-4 text-2xl font-bold tracking-tight text-text-primary'>{project.title}</h3>
+      <p className='mt-4 leading-relaxed text-text-secondary'>{project.description}</p>
+      <div className='mt-6 flex-1'>
+        <p className='mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted'>{data.projectsSection.evidenceLabel}</p>
+        <ul className='space-y-2'>
+          {project.evidence.slice(0, 4).map((item) => <li key={item} className='flex gap-2 text-sm leading-relaxed text-text-secondary'><CheckCircle2 className='mt-0.5 h-4 w-4 shrink-0 text-primary' />{item}</li>)}
+        </ul>
+      </div>
+      <div className='mt-6'><TechnologyList items={project.technologies} /></div>
+      <Link href={`/${language}/work/${project.slug}`} className='focus-ring mt-7 inline-flex w-fit items-center gap-2 rounded font-semibold text-primary group-hover:text-primary-hover'>
+        {data.actions.viewCase}<ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
+      </Link>
+    </article>
+  );
+}
+
+export function ProjectsSection({ data, language }: { data: PortfolioData; language: Language }) {
+  const [featured, ...secondary] = data.caseStudies;
+
+  return (
+    <section id='work' className='section-shell border-t border-border/60'>
+      <div className='mx-auto max-w-[1200px]'>
+        <SectionHeading eyebrow={data.projectsSection.eyebrow} title={data.projectsSection.title} description={data.projectsSection.description} />
+
+        <article className='case-card overflow-hidden'>
+          <div className='grid lg:grid-cols-[1.05fr_0.95fr]'>
+            <div className='p-7 sm:p-10 lg:p-12'>
+              <span className='inline-flex rounded-full border border-primary/30 bg-primary-soft px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-primary'>{data.projectsSection.featuredLabel}</span>
+              <p className='mt-5 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary'>{featured.category}</p>
+              <div className='mt-2 flex flex-wrap items-center gap-2'>
+                <p className='text-sm text-text-muted'>{featured.employer}</p>
+                <ProjectStatus status={featured.status} />
               </div>
+              <h3 className='mt-4 max-w-2xl text-3xl font-bold tracking-tight text-text-primary sm:text-4xl'>{featured.title}</h3>
+              <p className='mt-5 max-w-2xl text-lg leading-relaxed text-text-secondary'>{featured.description}</p>
+              <ul className='mt-7 space-y-3'>
+                {featured.evidence.map((item) => <li key={item} className='flex gap-3 text-sm leading-relaxed text-text-secondary'><CheckCircle2 className='mt-0.5 h-5 w-5 shrink-0 text-primary' />{item}</li>)}
+              </ul>
+              <div className='mt-7'><TechnologyList items={featured.technologies} /></div>
+              <Link href={`/${language}/work/${featured.slug}`} className='focus-ring mt-8 inline-flex items-center gap-2 rounded font-semibold text-primary hover:text-primary-hover'>
+                {data.actions.viewCase}<ArrowRight className='h-4 w-4' />
+              </Link>
+            </div>
+            <div className='border-t border-border bg-background-soft/70 p-5 sm:p-8 lg:border-l lg:border-t-0 lg:p-10'>
+              <FeaturedSummary project={featured} />
+            </div>
+          </div>
+        </article>
 
-              <p className="mb-6 text-base leading-relaxed text-text-secondary">
-                {project.description}
-              </p>
-
-              {project.focus && project.focus.length > 0 && (
-                <div className="mb-6 flex-grow">
-                  <p className="mb-3 text-sm font-semibold text-text-primary">
-                    {projectsSection.focusLabel}:
-                  </p>
-                  <ul className="space-y-1">
-                    {project.focus.map((item, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2 text-sm leading-relaxed text-text-secondary"
-                      >
-                        <span className="text-primary mt-1">&bull;</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <div className="mb-8 mt-auto flex flex-wrap gap-2">
-                {project.tags.map((tag, tagIdx) => (
-                  <span
-                    key={tagIdx}
-                    className="rounded border border-border bg-surface-elevated px-2 py-1 font-mono text-xs text-text-secondary"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <a
-                href={project.link.href}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-fit items-center gap-2 font-semibold text-primary transition-colors hover:text-primary-hover"
-              >
-                {project.link.label}
-                {project.link.kind === "document" ? (
-                  <FileText className="h-4 w-4" />
-                ) : (
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                )}
-              </a>
-            </article>
-          ))}
+        <div className='mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+          {secondary.map((project) => <SecondaryCase key={project.slug} project={project} data={data} language={language} />)}
         </div>
       </div>
     </section>

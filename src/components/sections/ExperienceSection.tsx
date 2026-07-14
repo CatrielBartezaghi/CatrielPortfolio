@@ -1,76 +1,29 @@
-import { cn } from "@/lib/utils";
-import type { PortfolioData } from "@/data/portfolio";
+import { SectionHeading } from '@/components/SectionHeading';
+import { ArrowUpRight } from 'lucide-react';
+import type { PortfolioData } from '@/data/portfolio';
 
-type ExperienceSectionProps = {
-  data: PortfolioData;
-};
-
-export function ExperienceSection({ data }: ExperienceSectionProps) {
-  const { experience, experienceSection } = data;
-
-  const renderJobCard = (job: PortfolioData["experience"][number]) => (
-    <div className="glass-card rounded-xl p-6 transition-all group-hover:-translate-y-1 group-hover:border-primary/30">
-      <h3 className="text-2xl font-semibold text-text-primary mb-1">
-        {job.role}
-      </h3>
-      <h4 className="text-lg text-secondary mb-4">
-        {job.company}
-      </h4>
-      <ul className="space-y-3">
-        {job.bullets.map((bullet, i) => (
-          <li key={i} className="text-[16px] text-text-secondary leading-relaxed flex items-start gap-3">
-            <span className="text-primary mt-1.5">&bull;</span>
-            <span>{bullet}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-
+export function ExperienceSection({ data }: { data: PortfolioData }) {
   return (
-    <section id="experience" className="py-24 px-6 bg-surface-container-highest/30 border-y border-border">
-      <div className="max-w-[800px] mx-auto">
-        <h2 className="text-3xl font-semibold mb-12 text-center text-text-primary">
-          {experienceSection.title}
-        </h2>
-
-        <div className="relative space-y-12 before:absolute before:left-2 before:top-1.5 before:bottom-0 before:w-px before:bg-border md:hidden">
-          {experience.map((job, idx) => (
-            <div key={idx} className="grid grid-cols-[1rem_1fr] gap-x-5 items-start group">
-              <div className={cn(
-                "relative z-10 mt-1.5 h-4 w-4 rounded-full bg-background border-2 transition-colors",
-                job.current ? "border-primary" : "border-border group-hover:border-primary/50"
-              )}></div>
-              <div className="min-w-0">
-                <div className="mb-2">
-                  <span className={cn("font-mono text-sm", job.current ? "text-primary" : "text-text-muted")}>
-                    {job.year}
-                  </span>
-                </div>
-                {renderJobCard(job)}
+    <section id='experience' className='section-shell'>
+      <div className='mx-auto max-w-[1000px]'>
+        <SectionHeading eyebrow={data.experienceSection.eyebrow} title={data.experienceSection.title} description={data.experienceSection.description} />
+        <div className='relative space-y-6 before:absolute before:bottom-8 before:left-[7px] before:top-8 before:w-px before:bg-border sm:before:left-[132px]'>
+          {data.experience.map((job) => (
+            <article key={`${job.company}-${job.year}`} className='relative grid gap-4 pl-8 sm:grid-cols-[108px_1fr] sm:gap-10 sm:pl-0'>
+              <div className='absolute left-0 top-8 h-4 w-4 rounded-full border-2 border-primary bg-background sm:left-[125px]' aria-hidden='true' />
+              <p className='pt-7 font-mono text-xs leading-relaxed text-text-muted'>{job.year}</p>
+              <div className='case-card p-6 sm:p-8'>
+                <a href={job.companyUrl} target='_blank' rel='noreferrer' className='focus-ring inline-flex items-center gap-1 rounded font-mono text-xs font-semibold uppercase tracking-wider text-primary hover:text-primary-hover'>
+                  {job.company}<ArrowUpRight className='h-3.5 w-3.5' />
+                  <span className='sr-only'>, {data.actions.openExternal}</span>
+                </a>
+                <h3 className='mt-2 text-2xl font-bold text-text-primary'>{job.role}</h3>
+                <p className='mt-3 leading-relaxed text-text-secondary'>{job.summary}</p>
+                <ul className='mt-6 space-y-3'>
+                  {job.bullets.map((bullet) => <li key={bullet} className='flex gap-3 text-sm leading-relaxed text-text-secondary'><span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary' />{bullet}</li>)}
+                </ul>
               </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="relative hidden space-y-12 md:block">
-          {experience.map((job, idx) => (
-            <div key={idx} className="relative grid grid-cols-5 items-start group">
-              <div className="col-span-1 text-right pr-8 pt-1">
-                <span className={cn("font-mono text-sm", job.current ? "text-primary" : "text-text-muted")}>
-                  {job.year}
-                </span>
-              </div>
-
-              <div className={cn(
-                "absolute left-[20%] -ml-2 top-1.5 w-4 h-4 rounded-full bg-background border-2 z-10 transition-colors",
-                job.current ? "border-primary" : "border-border group-hover:border-primary/50"
-              )}></div>
-
-              <div className="col-span-4 pl-8 border-l border-border h-full pb-8 last:pb-0">
-                {renderJobCard(job)}
-              </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
