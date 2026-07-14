@@ -3,7 +3,7 @@ import type { PortfolioData } from '@/data/portfolio';
 
 export function ContactSection({ data }: { data: PortfolioData }) {
   return (
-    <section id='contact' className='section-shell'>
+    <section id='contact' className='section-shell border-t border-border'>
       <div className='mx-auto max-w-[900px] text-center'>
         <p className='font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary'>{data.contact.eyebrow}</p>
         <h2 className='mt-4 text-balance text-4xl font-bold tracking-tight text-text-primary sm:text-5xl'>{data.contact.headline}</h2>

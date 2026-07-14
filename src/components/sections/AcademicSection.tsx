@@ -3,7 +3,7 @@ import type { PortfolioData } from '@/data/portfolio';
 
 export function AcademicSection({ data }: { data: PortfolioData }) {
   return (
-    <section className='px-6 py-14'>
+    <section className='section-shell pb-0'>
       <article className='mx-auto max-w-[1100px] rounded-2xl border border-border bg-surface/55 p-7 sm:p-9'>
         <div>
           <p className='font-mono text-xs font-semibold uppercase tracking-[0.18em] text-secondary'>{data.academic.eyebrow}</p>
