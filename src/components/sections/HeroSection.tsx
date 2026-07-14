@@ -36,7 +36,7 @@ export function HeroSection({ data }: { data: PortfolioData }) {
         <div className='relative mx-auto hidden lg:block lg:w-[390px] lg:translate-x-8 lg:translate-y-4 lg:justify-self-end'>
           <div aria-hidden='true' className='absolute -inset-10 rounded-full bg-primary/15 blur-3xl' />
           <div className='relative aspect-square overflow-hidden rounded-full shadow-[0_24px_70px_rgba(0,0,0,0.36)]'>
-            <Image src='/me.jfif' alt={data.hero.imageAlt} fill priority sizes='390px' className='scale-[1.01] object-cover' />
+            <Image src='/me.jpg' alt={data.hero.imageAlt} fill priority sizes='390px' className='scale-[1.01] object-cover' />
           </div>
         </div>
       </div>
