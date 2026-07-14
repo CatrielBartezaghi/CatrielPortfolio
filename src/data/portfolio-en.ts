@@ -17,7 +17,7 @@ export const contentEn: PortfolioData = {
     headline: 'I build reliable software for critical operations',
     subtitle: 'I turn complex workflows into maintainable systems, with a focus on business logic, data, integrations, testing, and CI/CD.',
     supportingText: 'I currently evolve a multi-application industrial ERP spanning sales, production, inventory, and dispatch. I own the full delivery path: requirements discovery and definition, planning, design, implementation, and validation across PHP/MySQL and React, with automated testing and CI.',
-    proofPoints: ['Business logic', 'Data & integrations', 'Testing & CI/CD'],
+    proofPoints: ['Business logic', 'Data modeling', 'Full development lifecycle'],
     imageAlt: 'Portrait of Catriel Bartezaghi',
   },
   actions: {

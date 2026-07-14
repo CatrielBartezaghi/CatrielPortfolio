@@ -17,7 +17,7 @@ export const contentEs: PortfolioData = {
     headline: 'Construyo software confiable para operaciones críticas',
     subtitle: 'Llevo procesos complejos a sistemas mantenibles, con reglas de negocio claras, datos consistentes e integraciones bajo control.',
     supportingText: 'Actualmente evoluciono un ERP industrial multiaplicación que conecta ventas, producción, inventario y expedición. Me hago cargo del recorrido completo: relevar y definir requisitos, planificar, diseñar, implementar y validar cambios sobre PHP/MySQL y React, con testing automatizado y CI.',
-    proofPoints: ['Lógica de negocio', 'Datos e integraciones', 'Testing y CI/CD'],
+    proofPoints: ['Lógica de negocio', 'Modelado de datos', 'Ciclo completo de desarrollo'],
     imageAlt: 'Retrato de Catriel Bartezaghi',
   },
   actions: {
