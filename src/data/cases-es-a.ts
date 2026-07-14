@@ -43,6 +43,13 @@ export const casesEsA: CaseStudy[] = [
     role: 'Implementé funcionalidades full stack de punta a punta: modelado relacional, lógica de negocio, integraciones, control de acceso, vistas administrativas y públicas, reportes, correos y correcciones posteriores a pruebas funcionales. Mi contribución varió por plataforma y se detalla a continuación.',
     initiatives: [
       {
+        name: 'Plataforma de gestión contable',
+        domain: 'Gestión contable multi-organización',
+        description: 'Desarrollé el sistema completo desde cero: modelado relacional, migraciones, lógica de dominio y paneles administrativos para múltiples organizaciones. Propuse usar FilamentPHP como base de la interfaz, lo que aceleró la construcción de tablas, formularios y vistas de gestión con alta configurabilidad.',
+        contributions: ['Modelo de datos completo, migraciones, seeders y relaciones entre organizaciones, servicios, cuentas y movimientos', 'Paneles administrativos con FilamentPHP: tablas configurables, formularios y gestión de accesos con roles y permisos', 'Carga de operaciones financieras por mensaje de texto: el operador escribe en lenguaje natural, OpenAI interpreta el contenido vía Twilio y el sistema pre-completa el formulario listo para confirmar'],
+        technologies: ['Laravel 10', 'MySQL', 'FilamentPHP', 'OpenAI API', 'Twilio'],
+      },
+      {
         name: 'Gestión financiera',
         domain: 'Gestión financiera institucional',
         description: 'Implementé piezas centrales de un circuito bancario donde órdenes, movimientos, saldos, arqueos y retenciones debían evolucionar de forma coordinada.',
@@ -70,13 +77,6 @@ export const casesEsA: CaseStudy[] = [
         description: 'Evolucioné flujos de gastos e imputaciones con reglas de aprobación, rechazo, visibilidad y automatización.',
         contributions: ['Restricciones por estado, permiso e imputaciones existentes para preservar integridad', '2FA, correos transaccionales y ajustes al comando automático de generación de gastos'],
         technologies: ['Laravel 8', 'MySQL', 'Eloquent', 'Laravel Mail', 'Artisan'],
-      },
-      {
-        name: 'Cervino',
-        domain: 'Gestión contable multi-organización',
-        description: 'Desarrollé la aplicación desde su base técnica hasta completar la mayor parte de sus módulos administrativos para organizaciones, servicios, cuentas y movimientos.',
-        contributions: ['Modelo de datos, migraciones, seeders, relaciones de dominio e interfaces con Livewire y PowerGrid', 'Roles y permisos, más integración de OpenAI y Twilio para interpretar mensajes y preparar la carga de operaciones financieras'],
-        technologies: ['Laravel 10', 'MySQL', 'Livewire 3', 'PowerGrid', 'OpenAI API', 'Twilio'],
       },
     ],
     constraints: ['Evolucionar productos existentes y distintas generaciones de Laravel', 'Restringir datos y acciones según organización, permiso y estado de negocio'],

@@ -50,6 +50,13 @@ export const casesEnA: CaseStudy[] = [
     role: 'I implemented end-to-end full-stack functionality across relational modeling, business logic, integrations, access control, administrative and public interfaces, reports, email, and follow-up corrections after functional testing. My contribution varied by platform and is detailed below.',
     initiatives: [
       {
+        name: 'Accounting management platform',
+        domain: 'Multi-organization accounting management',
+        description: 'Built the system from scratch: relational data modeling, migrations, domain logic, and admin panels for multiple organizations. Proposed FilamentPHP as the interface foundation, which significantly accelerated the delivery of configurable tables, forms, and management views.',
+        contributions: ['Full data model, migrations, seeders, and relationships across organizations, services, accounts, and movements', 'Admin panels with FilamentPHP: configurable tables, forms, and role-based access management', 'Financial operation entry via natural language: the operator sends a text message, OpenAI interprets it through Twilio, and the system pre-fills the form ready to confirm'],
+        technologies: ['Laravel 10', 'MySQL', 'FilamentPHP', 'OpenAI API', 'Twilio'],
+      },
+      {
         name: 'Financial management',
         domain: 'Institutional financial management',
         description: 'Implemented central parts of a banking workflow where orders, movements, balances, reconciliations, and withholdings had to evolve in sync.',
@@ -59,7 +66,7 @@ export const casesEnA: CaseStudy[] = [
       {
         name: 'Community support',
         domain: 'Community support and AI',
-        description: 'Designed a timeline combining activities, tasks, and notes from different initiatives and generating contextual descriptions in the recipient’s language.',
+        description: 'Designed a timeline combining activities, tasks, and notes from different initiatives and generating contextual descriptions in the recipient\'s language.',
         contributions: ['Strategy, Factory, contracts, and services separated by initiative', 'OpenAI, persistent caching, filters, permissions, selective regeneration, and human editing'],
         technologies: ['Laravel 8', 'MySQL', 'OpenAI API', 'Guzzle', 'Blade'],
       },
@@ -77,13 +84,6 @@ export const casesEnA: CaseStudy[] = [
         description: 'Evolved expense and allocation workflows with approval, rejection, visibility, and automation rules.',
         contributions: ['Restrictions based on state, permissions, and existing allocations to preserve integrity', 'Two-factor authentication, transactional email, and changes to automated expense generation'],
         technologies: ['Laravel 8', 'MySQL', 'Eloquent', 'Laravel Mail', 'Artisan'],
-      },
-      {
-        name: 'Cervino',
-        domain: 'Multi-organization accounting management',
-        description: 'Built the application from its technical foundation through most of its administrative modules for organizations, services, accounts, and movements.',
-        contributions: ['Data model, migrations, seeders, domain relationships, and interfaces with Livewire and PowerGrid', 'Roles and permissions, plus OpenAI and Twilio integration to interpret messages and prepare financial-operation entry'],
-        technologies: ['Laravel 10', 'MySQL', 'Livewire 3', 'PowerGrid', 'OpenAI API', 'Twilio'],
       },
     ],
     constraints: ['Evolve existing products across different Laravel generations', 'Restrict data and actions by organization, permission, and business state'],
