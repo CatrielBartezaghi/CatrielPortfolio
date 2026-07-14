@@ -25,19 +25,48 @@ export const casesEsB: CaseStudy[] = [
     slug: 'tallynorth', featured: false, diagram: 'tallynorth',
     category: 'Producto personal full stack', employer: 'Aplicación funcional · Beta',
     title: 'TallyNorth: proyección y análisis financiero multimoneda',
-    description: 'Plataforma que transforma cuentas, movimientos, tarjetas e inversiones en cuotas, proyecciones de flujo e indicadores consolidados en ARS o USD.',
-    evidence: ['Cuotas según cierres y vencimientos, recurrencias y proyección de cashflow', 'Importación masiva de consumos desde archivos CSV', 'Autenticación JWT y aislamiento de datos por usuario', 'Cotizaciones externas y consolidación directa, inversa o cruzada'],
+    description: 'Plataforma full stack que integra cuentas, inversiones y consumos con tarjeta para consolidar el patrimonio y proyectar el flujo de caja mensual.',
+    evidence: [
+      'Motor de vencimientos por cierre de tarjeta y proyección de flujo mensual',
+      'Consolidación multimoneda con cotizaciones directas, inversas y cruzadas',
+      'Aislamiento multiusuario a nivel de consulta y cookies de sesión seguras',
+      'Importación masiva de consumos y conciliación automática desde CSV'
+    ],
     technologies: ['Next.js', 'TypeScript', 'FastAPI', 'PostgreSQL'],
-    summary: 'TallyNorth es una plataforma personal full stack que creé porque las aplicaciones habituales resultaban incompletas para planificar compras en cuotas, consumos recurrentes y cargas masivas. Centraliza cuentas, movimientos, tarjetas, presupuestos, metas e inversiones, y convierte esos datos en proyecciones mensuales, patrimonio consolidado e indicadores para tomar decisiones.',
-    context: 'Las aplicaciones habituales suelen resolver el registro básico, pero quedan cortas cuando hay compras en cuotas según cierre y vencimiento, gastos recurrentes o muchos consumos para cargar. Esa limitación me llevó a crear una herramienta que combinara operación, planificación y análisis.',
-    problem: 'Necesitaba representar cuotas y recurrencias sin repartir las reglas entre la interfaz y la base de datos, permitir importaciones masivas, consolidar valores aun cuando no existiera una cotización directa y proteger la información de cada usuario.',
-    role: 'Diseñé y desarrollé el producto de punta a punta: modelo relacional, API REST, servicios de dominio, autenticación y autorización, integración de cotizaciones, dashboard bilingüe e interfaz responsive.',
-    constraints: ['Modelar cierres, vencimientos, cuotas y recurrencias sin generar fechas inválidas', 'Mantener aislados los datos financieros de cada usuario', 'Importar muchos consumos sin perder validaciones ni consistencia'],
-    decisions: ['Materializar cada cuota por su identidad, vencimiento y estado, pero calcular las recurrencias futuras bajo demanda', 'Centralizar las reglas de cuotas, recurrencias y consolidación en servicios de dominio', 'Validar los consumos importados desde CSV antes de incorporarlos', 'Resolver cotizaciones directas, inversas o cruzadas y advertir cuando no hay datos suficientes'],
-    implementation: ['Construí flujos para cuentas, movimientos, tarjetas, presupuestos, metas, inversiones, monedas y cotizaciones', 'Implementé cuotas según cierre y vencimiento, expansión de recurrencias, proyección mensual de cashflow e importación masiva desde CSV', 'Desarrollé un dashboard ES/EN con KPIs, gráficos, presupuestos, metas y patrimonio multimoneda'],
-    quality: ['JWT en cookies HttpOnly y filtros de propiedad junto al acceso a datos', 'Contratos Pydantic separados de los modelos SQLAlchemy y validaciones en los flujos de carga', 'Entorno reproducible con Docker Compose y evolución del esquema mediante Alembic'],
-    results: ['Producto funcional desplegado como beta con flujos conectados desde Next.js hasta PostgreSQL', 'Carga individual y masiva de consumos, planificación de cuotas y recurrencias en un mismo sistema', 'Vista integrada de operación, planificación y análisis financiero'],
-    tradeoffs: ['La carga masiva actual parte de archivos CSV estructurados; el próximo paso es incorporar resúmenes de cuenta y otros documentos', 'La carga desde documentos deberá generar un borrador revisable antes de crear los consumos, priorizando control sobre automatización total', 'Ampliar las pruebas automatizadas y sumar CI sigue siendo una prioridad para evolucionar el producto con mayor seguridad'],
+    summary: 'TallyNorth es una plataforma de finanzas personales que conecta el registro cotidiano con la planificación futura. Centraliza cuentas, presupuestos, metas, tarjetas e inversiones, y proyecta cuotas, consumos recurrentes y patrimonio consolidado en ARS o USD.',
+    context: 'El control financiero personal cotidiano suele limitarse al registro de gastos pasados. Sin embargo, para tomar decisiones reales, el usuario necesita ver su liquidez futura consolidada y planificar consumos a plazo antes de que impacten en sus cuentas.',
+    problem: 'El desafío técnico era representar de forma íntegra las compras con tarjeta según su fecha de cierre y vencimiento, proyectar flujos futuros calculando recurrencias bajo demanda y consolidar activos financieros en distintas monedas sin cotizaciones directas.',
+    role: 'Diseñé y desarrollé la aplicación de extremo a extremo: desde el diseño del esquema relacional y las reglas del dominio financiero en el backend, hasta la construcción del cliente de API y las vistas analíticas en la interfaz.',
+    constraints: [
+      'Modelar la lógica de tarjetas de crédito con fechas de cierre y vencimiento sin generar inconsistencias de fechas',
+      'Garantizar el aislamiento estricto de registros entre usuarios en todos los endpoints',
+      'Procesar importaciones masivas de consumos asegurando validaciones y consistencia de datos'
+    ],
+    decisions: [
+      'Modelar cada compra con tarjeta y sus cuotas como entidades independientes para registrar individualmente sus vencimientos y pagos, mientras que las recurrencias futuras se calculan bajo demanda',
+      'Separar las reglas de conversión de divisas, proyecciones de flujo e importaciones del framework web, facilitando su mantenimiento y testing independiente',
+      'Implementar el aislamiento de datos multiusuario en el backend para que cada petición opere únicamente sobre los registros del usuario autenticado'
+    ],
+    implementation: [
+      'Estructuré la API REST en FastAPI definiendo schemas Pydantic diferenciados para la entrada y salida de datos',
+      'Construí la interfaz web interactiva con Next.js, React y TypeScript, administrando el estado y optimizando las peticiones de datos al servidor',
+      'Integré Recharts para el dashboard interactivo y Yahoo Finance para la sincronización programada de cotizaciones'
+    ],
+    quality: [
+      'Asegurar la integridad transaccional de la base de datos para registrar movimientos, tarjetas y presupuestos de forma atómica y evitar estados parciales huérfanos',
+      'Proteger el token de sesión mediante el uso de cookies firmadas HttpOnly con políticas Secure y SameSite frente a accesos no autorizados',
+      'Migraciones de esquema versionadas con Alembic y ambiente contenerizado reproducible mediante Docker Compose'
+    ],
+    results: [
+      'Aplicación beta completamente funcional desplegada en producción y repositorio de código público accesible',
+      'Dashboard bilingüe integrado que muestra proyecciones mensuales de cashflow, avance de metas y rendimiento de inversiones',
+      'Carga de consumos individual, masiva desde archivos CSV y planificación automatizada de vencimientos operativa'
+    ],
+    tradeoffs: [
+      'La carga masiva requiere archivos CSV estructurados; la flexibilidad de procesar resúmenes libres queda supeditada a un posterior módulo de IA con revisión humana',
+      'El cálculo bajo demanda de recurrencias futuras ahorra almacenamiento y mantenimiento, pero demanda mayor procesamiento en lecturas grandes',
+      'Se priorizó la consistencia transaccional y el aislamiento de datos sobre la velocidad de desarrollo de nuevas vistas de análisis'
+    ],
     links: [
       { label: 'Abrir aplicación', href: 'https://tally-north.vercel.app/', kind: 'external' },
       { label: 'Ver repositorio', href: 'https://github.com/CatrielBartezaghi/TallyNorth', kind: 'external' },

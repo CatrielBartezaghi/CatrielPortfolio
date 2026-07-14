@@ -31,20 +31,49 @@ export const casesEnB: CaseStudy[] = [
     category: 'Full-stack personal product',
     employer: 'Functional application · Beta',
     title: 'TallyNorth: multi-currency financial planning and analytics',
-    description: 'A platform that turns accounts, transactions, credit cards, and investments into installment schedules, cash-flow projections, and consolidated ARS or USD indicators.',
-    evidence: ['Installments based on closing and due dates, recurrences, and cash-flow projections', 'Bulk transaction imports from CSV files', 'JWT authentication and per-user data isolation', 'External rates with direct, inverse, and cross-currency conversion'],
+    description: 'A full-stack platform integrating accounts, investments, and card transactions to consolidate net worth and project monthly cash flows.',
+    evidence: [
+      'Card statement schedule engine and monthly cash flow projection',
+      'Multi-currency consolidation with direct, inverse, and cross exchange rates',
+      'Multi-tenant query-level isolation and secure HTTP-only cookie sessions',
+      'Bulk transaction imports and automatic reconciliation from CSV files'
+    ],
     technologies: ['Next.js', 'TypeScript', 'FastAPI', 'PostgreSQL'],
     diagram: 'tallynorth',
-    summary: 'TallyNorth is a full-stack personal finance platform I created because typical applications were incomplete for planning installment purchases, recurring expenses, and bulk data entry. It centralizes accounts, transactions, credit cards, budgets, goals, and investments, then turns that data into monthly projections, consolidated net worth, and decision-oriented indicators.',
-    context: 'Typical applications handle basic transaction entry but fall short when purchases depend on card closing and due dates, expenses recur, or many transactions need to be loaded at once. That gap led me to build a tool combining day-to-day management, planning, and analysis.',
-    problem: 'I needed to model installments and recurrences without scattering rules across the UI and database, support bulk imports, consolidate values when no direct exchange rate existed, and protect every user’s financial data.',
-    role: 'I designed and built the product end to end: relational model, REST API, domain services, authentication and authorization, market-rate integration, bilingual dashboard, and responsive interface.',
-    constraints: ['Model closing dates, due dates, installments, and recurrences without generating invalid dates', 'Keep each user’s financial data isolated', 'Import many transactions without losing validation or consistency'],
-    decisions: ['Materialize installments because each has its own identity, due date, and status, while deriving future recurrences on demand', 'Centralize installment, recurrence, and consolidation rules in domain services', 'Validate CSV-imported transactions before adding them', 'Resolve direct, inverse, or cross rates and warn when available data is insufficient'],
-    implementation: ['Built flows for accounts, transactions, credit cards, budgets, goals, investments, currencies, and exchange rates', 'Implemented closing- and due-date installment schedules, recurring transaction expansion, monthly cash-flow projections, and bulk CSV imports', 'Developed an ES/EN dashboard with KPIs, charts, budgets, goals, and multi-currency net worth'],
-    quality: ['JWT sessions in HttpOnly cookies and ownership filters close to data access', 'Pydantic contracts separated from SQLAlchemy models, with validation across data-entry flows', 'Reproducible Docker Compose environment and versioned schema evolution through Alembic'],
-    results: ['A functional beta with connected flows from Next.js through PostgreSQL', 'Individual and bulk transaction entry, installment planning, and recurrences in one system', 'An integrated view of financial operations, planning, and analysis'],
-    tradeoffs: ['Bulk imports currently rely on structured CSV files; the next step is to support account statements and other documents', 'Document-based entry should produce a reviewable draft before creating transactions, prioritizing control over full automation', 'Expanding automated test coverage and adding CI remain priorities for evolving the product more safely'],
+    summary: 'TallyNorth is a personal finance platform that connects day-to-day tracking with future planning. It centralizes accounts, budgets, goals, cards, and investments, projecting installments, recurring transactions, and consolidated net worth in ARS or USD.',
+    context: 'Day-to-day personal finance management is often limited to tracking past expenses. However, to make real decisions, the user needs to view future liquidity and plan financed purchases before they hit their bank accounts.',
+    problem: 'The technical challenge was representing credit card purchases based on closing and due dates, projecting cash flow by calculating recurrences on demand, and consolidating assets across different currencies without direct exchange rates.',
+    role: 'I designed and built the application end-to-end: from database schema and backend domain rules to the API client and analytics views in the interface.',
+    constraints: [
+      'Model credit card billing cycles and due dates without generating invalid dates or timeline gaps',
+      'Enforce strict record isolation between users across all API endpoints',
+      'Process bulk imports of transactions while enforcing strict validation and consistency'
+    ],
+    decisions: [
+      'Model each card purchase and its installments as independent entities to individually track their due dates and payments, while future recurrences are calculated on demand',
+      'Isolate currency conversion, cash flow projection, and import logic from the web framework, allowing independent maintenance and testing',
+      'Implement multi-tenant data isolation at the backend level so that each request operates strictly on the authenticated user\'s records'
+    ],
+    implementation: [
+      'Structured the FastAPI REST API with Pydantic schemas separating data input from serialized outputs',
+      'Built the interactive web interface with Next.js, React, and TypeScript, managing application state and optimizing data fetching',
+      'Integrated Recharts for the interactive dashboard and Yahoo Finance API for scheduled market rate synchronization'
+    ],
+    quality: [
+      'Ensure database transactional integrity in PostgreSQL to write movements, cards, and budgets atomically and avoid orphaned states',
+      'Protect the session token using signed cookies (HttpOnly, Secure, SameSite) against unauthorized access and common web vulnerabilities',
+      'Versioned database migrations with Alembic and reproducible containerized environments using Docker Compose'
+    ],
+    results: [
+      'Fully functional beta application deployed to production with a publicly accessible code repository',
+      'Bilingual dashboard integration showing monthly cash flow projections, savings goal progress, and investment returns',
+      'Working transaction entry system supporting manual inputs, bulk CSV imports, and automated statement scheduling'
+    ],
+    tradeoffs: [
+      'Bulk imports depend on structured CSVs; processing raw statements is deferred to an upcoming AI module with human-in-the-loop validation',
+      'On-demand recurrence expansion saves database storage but requires more compute power for large date range queries',
+      'Prioritized transactional integrity and strict multi-tenant isolation over rapid prototyping of additional dashboard widgets'
+    ],
     links: [
       { label: 'Open live app', href: 'https://tally-north.vercel.app/', kind: 'external' },
       { label: 'View repository', href: 'https://github.com/CatrielBartezaghi/TallyNorth', kind: 'external' },
