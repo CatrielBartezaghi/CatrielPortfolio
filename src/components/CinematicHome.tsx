@@ -14,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export function CinematicHome({ data, language }: { data: PortfolioData; language: Language }) {
   const root = useRef<HTMLDivElement>(null);
+  const story = useRef<HTMLDivElement>(null);
   const showcase = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const statement = useRef<HTMLParagraphElement>(null);
@@ -93,59 +94,82 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
 
     });
 
-    motion.add('(min-height: 560px) and (prefers-reduced-motion: no-preference)', () => {
-      if (!statement.current || !statementSection.current) return;
+    // One pinned timeline controls BOTH the horizontal project showcase and
+    // the reading statement. Separate pin spacers made the handoff jump.
+    motion.add('(min-width: 821px) and (min-height: 650px) and (prefers-reduced-motion: no-preference)', () => {
+      const scene = story.current;
+      const cards = showcase.current;
+      const strip = track.current;
+      const reading = statementSection.current;
+      const text = statement.current;
+      if (!scene || !cards || !strip || !reading || !text) return;
 
-      const words = statement.current.querySelectorAll<HTMLElement>('.vh-text-word');
-      // On very small viewports the statement may be taller than the available
-      // reading area. Show it normally instead of pinning clipped text.
-      const safeSpace = window.innerWidth <= 520 ? 165 : 195;
-      if (statement.current.getBoundingClientRect().height + safeSpace > window.innerHeight) {
-        gsap.set(words, { color: '#ededed' });
-        return;
-      }
-      // Pin the full section: scrolling is spent revealing each word before
-      // the following section can enter the viewport.
-      const reading = gsap.timeline({
+      // Let shorter desktop viewports scroll normally rather than clipping text.
+      if (text.getBoundingClientRect().height + 180 > window.innerHeight) return;
+
+      const distance = () => Math.max(0, strip.scrollWidth - window.innerWidth);
+      const travel = distance();
+      scene.classList.add('vh-story--enhanced');
+
+      const words = text.querySelectorAll<HTMLElement>('.vh-text-word');
+      // Use one ScrollTrigger and pin spacer. A fade handoff connects the two
+      // scenes, then the text reveals word by word before the section unpins.
+      const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: statementSection.current,
+          trigger: scene,
           start: 'top top',
-          end: () => '+=' + Math.round(window.innerHeight * 2.1),
-          scrub: 0.5,
+          end: () => '+=' + Math.round(distance() + window.innerHeight * 2.3),
+          scrub: 0.65,
           pin: true,
           pinSpacing: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
-      reading.to(words, {
-        color: '#ededed',
-        duration: 0.24,
-        stagger: 0.1,
+
+      timeline.to(strip, {
+        x: () => -distance(),
+        duration: Math.max(1, travel / 650),
         ease: 'none',
       });
+      timeline.to(cards, { autoAlpha: 0, duration: 0.45, ease: 'none' });
+      timeline.fromTo(reading, {
+        autoAlpha: 0,
+        y: 28,
+      }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.55,
+        ease: 'power1.out',
+      }, '<0.12');
+      timeline.to(words, {
+        color: '#ededed',
+        duration: 0.75,
+        stagger: { each: 0.075, from: 'start' },
+        ease: 'none',
+      });
+      timeline.to({}, { duration: 0.35 });
 
-      return () => reading.scrollTrigger?.kill();
+      return () => {
+        timeline.kill();
+        scene.classList.remove('vh-story--enhanced');
+      };
     });
 
-    motion.add('(min-width: 821px) and (prefers-reduced-motion: no-preference)', () => {
-      if (!track.current || !showcase.current) return;
-      const strip = track.current;
-      const distance = () => Math.max(0, strip.scrollWidth - window.innerWidth);
-
-      // Port of Velox's horizontal showcase: pin one quiet section instead of
-      // changing multiple visual layers with every scroll step.
-      gsap.to(strip, {
-        x: () => -distance(),
+    // Natural vertical scrolling on narrow or short screens. Never pin
+    // content that might be taller than its viewport.
+    motion.add('(max-width: 820px), (max-height: 649px)', () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !statement.current) return;
+      const words = statement.current.querySelectorAll<HTMLElement>('.vh-text-word');
+      gsap.to(words, {
+        color: '#ededed',
+        stagger: 0.06,
         ease: 'none',
         scrollTrigger: {
-          trigger: showcase.current,
-          start: 'top top',
-          end: () => '+=' + distance(),
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
+          trigger: statement.current,
+          start: 'top 85%',
+          end: 'bottom 30%',
+          scrub: true,
         },
       });
     });
@@ -203,40 +227,42 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
         </div>
       </section>
 
-      <section className='vh-showcase' id='work' ref={showcase} aria-label={data.projectsSection.title}>
-        <div className='vh-showcase-track' ref={track}>
-          {projects.map((project, index) => (
-            <article className='vh-project' key={project.slug}>
-              <div className='vh-project-top'>
-                <span>{String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>
-                <span>{project.category}</span>
-              </div>
-              <div className='vh-project-main'>
-                <p className='vh-project-employer'>{project.employer}</p>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-              </div>
-              <div className='vh-project-bottom'>
-                <div className='vh-tags'>
-                  {project.technologies.slice(0, 3).map((tech) => <span key={tech}>{tech}</span>)}
+      <div className='vh-story' ref={story}>
+        <section className='vh-showcase' id='work' ref={showcase} aria-label={data.projectsSection.title}>
+          <div className='vh-showcase-track' ref={track}>
+            {projects.map((project, index) => (
+              <article className='vh-project' key={project.slug}>
+                <div className='vh-project-top'>
+                  <span>{String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>
+                  <span>{project.category}</span>
                 </div>
-                <Link href={'/' + language + '/work/' + project.slug} className='vh-case-link'>
-                  {data.actions.viewCase} <ArrowUpRight size={18} aria-hidden='true' />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className='vh-statement-section' ref={statementSection} aria-label={es ? 'Mi enfoque' : 'My approach'}>
-        <div className='vh-statement-layout vh-container'>
-          <p className='vh-statement-eyebrow'>{es ? 'Mi forma de trabajar' : 'How I work'}</p>
-          <p className='vh-statement' ref={statement} aria-label={sentence}>
-            {sentence.split(' ').map((word, index) => <span className='vh-text-word' key={index}>{word}{' '}</span>)}
-          </p>
-        </div>
-      </section>
+                <div className='vh-project-main'>
+                  <p className='vh-project-employer'>{project.employer}</p>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                </div>
+                <div className='vh-project-bottom'>
+                  <div className='vh-tags'>
+                    {project.technologies.slice(0, 3).map((tech) => <span key={tech}>{tech}</span>)}
+                  </div>
+                  <Link href={'/' + language + '/work/' + project.slug} className='vh-case-link'>
+                    {data.actions.viewCase} <ArrowUpRight size={18} aria-hidden='true' />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+  
+        <section className='vh-statement-section' ref={statementSection} aria-label={es ? 'Mi enfoque' : 'My approach'}>
+          <div className='vh-statement-layout vh-container'>
+            <p className='vh-statement-eyebrow'>{es ? 'Mi forma de trabajar' : 'How I work'}</p>
+            <p className='vh-statement' ref={statement} aria-label={sentence}>
+              {sentence.split(' ').map((word, index) => <span className='vh-text-word' key={index}>{word}{' '}</span>)}
+            </p>
+          </div>
+        </section>
+      </div>
 
       <section className='vh-experience vh-container' id='experience' aria-labelledby='vh-experience-heading'>
         <div className='vh-section-meta vh-reveal'>
