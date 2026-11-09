@@ -17,6 +17,7 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
   const showcase = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const statement = useRef<HTMLParagraphElement>(null);
+  const statementSection = useRef<HTMLElement>(null);
   const es = language === 'es';
   const projects = data.caseStudies;
 
@@ -90,19 +91,34 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
         },
       });
 
-      if (statement.current) {
-        gsap.to(statement.current.querySelectorAll('.vh-text-word'), {
-          color: '#ededed',
-          stagger: 0.09,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: statement.current,
-            start: 'top 82%',
-            end: 'bottom 48%',
-            scrub: true,
-          },
-        });
-      }
+    });
+
+    motion.add('(min-height: 560px) and (prefers-reduced-motion: no-preference)', () => {
+      if (!statement.current || !statementSection.current) return;
+
+      const words = statement.current.querySelectorAll<HTMLElement>('.vh-text-word');
+      // Pin the full section: scrolling is spent revealing each word before
+      // the following section can enter the viewport.
+      const reading = gsap.timeline({
+        scrollTrigger: {
+          trigger: statementSection.current,
+          start: 'top top',
+          end: () => '+=' + Math.round(window.innerHeight * 2.1),
+          scrub: 0.5,
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+      reading.to(words, {
+        color: '#ededed',
+        duration: 0.24,
+        stagger: 0.1,
+        ease: 'none',
+      });
+
+      return () => reading.scrollTrigger?.kill();
     });
 
     motion.add('(min-width: 821px) and (prefers-reduced-motion: no-preference)', () => {
@@ -131,8 +147,8 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
   }, { scope: root });
 
   const sentence = es
-    ? 'Entiendo procesos complejos y los convierto en sistemas claros, confiables y mantenibles.'
-    : 'I turn complex workflows into clear, reliable, and maintainable systems.';
+    ? 'Entiendo procesos complejos y los convierto en sistemas claros, confiables y mantenibles. Para mí, desarrollar software no es solo escribir código: es descubrir las reglas del negocio, tomar decisiones fundamentadas y cuidar los datos. Busco soluciones que resuelvan problemas reales, evolucionen con el tiempo y puedan sostenerse en producción.'
+    : 'I turn complex workflows into clear, reliable, and maintainable systems. To me, building software is not just writing code: it means uncovering business rules, making thoughtful decisions, and protecting data. I focus on solutions that solve real problems, evolve over time, and remain dependable in production.';
 
   return (
     <div ref={root} className='velox-home'>
@@ -206,10 +222,13 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
         </div>
       </section>
 
-      <section className='vh-statement-section vh-container' aria-label={es ? 'Mi enfoque' : 'My approach'}>
-        <p className='vh-statement' ref={statement} aria-label={sentence}>
-          {sentence.split(' ').map((word, index) => <span className='vh-text-word' key={index}>{word}{' '}</span>)}
-        </p>
+      <section className='vh-statement-section' ref={statementSection} aria-label={es ? 'Mi enfoque' : 'My approach'}>
+        <div className='vh-statement-layout vh-container'>
+          <p className='vh-statement-eyebrow'>{es ? 'Mi forma de trabajar' : 'How I work'}</p>
+          <p className='vh-statement' ref={statement} aria-label={sentence}>
+            {sentence.split(' ').map((word, index) => <span className='vh-text-word' key={index}>{word}{' '}</span>)}
+          </p>
+        </div>
       </section>
 
       <section className='vh-experience vh-container' id='experience' aria-labelledby='vh-experience-heading'>
