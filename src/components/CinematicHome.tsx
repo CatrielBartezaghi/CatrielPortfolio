@@ -97,6 +97,13 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
       if (!statement.current || !statementSection.current) return;
 
       const words = statement.current.querySelectorAll<HTMLElement>('.vh-text-word');
+      // On very small viewports the statement may be taller than the available
+      // reading area. Show it normally instead of pinning clipped text.
+      const safeSpace = window.innerWidth <= 520 ? 165 : 195;
+      if (statement.current.getBoundingClientRect().height + safeSpace > window.innerHeight) {
+        gsap.set(words, { color: '#ededed' });
+        return;
+      }
       // Pin the full section: scrolling is spent revealing each word before
       // the following section can enter the viewport.
       const reading = gsap.timeline({
