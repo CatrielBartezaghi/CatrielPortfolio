@@ -169,7 +169,7 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
 .vh-case-link { white-space:nowrap; display:inline-flex; align-items:center; gap:9px; font-size:.85rem; color:#eee; border-bottom:1px solid #777; padding-bottom:8px; }
 .vh-case-link:hover { color:#fff; border-color:#fff; }
 
-/* Velox-style features: six dark cards in a 3×2 grid. Violet belongs only to the shape BEHIND them. */
+/* Velox-style features: six dark cards in a 3×2 grid on a plain black background. */
 .vh-features {
   min-height: 100svh;
   padding: 125px 5vw 145px;
@@ -188,17 +188,6 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
   line-height: 1.15;
   letter-spacing: -.045em;
   text-wrap: balance;
-}
-.vh-features-scene { position: relative; isolation: isolate; }
-.vh-feature-shape {
-  position: absolute;
-  z-index: -1;
-  pointer-events: none;
-  width: min(48vw, 470px);
-  height: auto;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) rotate(-3deg);
 }
 .vh-features-grid {
   display: grid;
@@ -304,7 +293,6 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
   .vh-features-title { margin-bottom: 55px; font-size: clamp(2.45rem, 5.5vw, 3.5rem); }
   .vh-features-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .vh-feature-card { min-height: 265px; padding: 32px 25px; }
-  .vh-feature-shape { width: min(65vw, 380px); }
   .vh-heading { margin:30px 0 60px; font-size:clamp(2.8rem,7vw,4.7rem); }
   .vh-statement-section { padding: 125px 0; }
   .vh-statement { font-size:clamp(2rem,6vw,3.6rem); }
@@ -327,7 +315,6 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
   .vh-feature-card { min-height: 225px; padding: 30px 25px; gap: 19px; }
   .vh-feature-card h3 { font-size: 1.2rem; }
   .vh-feature-card p { max-width: 285px; }
-  .vh-feature-shape { width: min(88vw, 330px); opacity: .72; }
   .vh-about p { font-size:1rem; }
   .vh-contact h2 { font-size:clamp(3rem,10vw,4.8rem); }
   .vh-social-links { gap:18px; }
