@@ -272,3 +272,18 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
   }
   .vh-text-word { color:#ededed; }
 }
+
+@media (prefers-reduced-motion: reduce) and (min-width: 821px) {
+  .vh-showcase { height:auto; min-height:0; overflow:visible; }
+  .vh-showcase-track {
+    width:min(100% - 10vw,1350px);
+    margin:auto;
+    padding:0;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:24px;
+    transform:none !important;
+    will-change:auto;
+  }
+  .vh-project { width:100%; height:auto; min-height:470px; }
+}
