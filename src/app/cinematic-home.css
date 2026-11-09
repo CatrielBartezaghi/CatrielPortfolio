@@ -169,23 +169,83 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
 .vh-case-link { white-space:nowrap; display:inline-flex; align-items:center; gap:9px; font-size:.85rem; color:#eee; border-bottom:1px solid #777; padding-bottom:8px; }
 .vh-case-link:hover { color:#fff; border-color:#fff; }
 
-/* A single scroll-linked text reveal, followed by a quiet skills grid. */
-.vh-capabilities { padding: clamp(120px,14vw,210px) 0 150px; }
-.vh-capabilities .vh-heading { margin-bottom: 65px; }
+/* Velox-style features: six dark cards in a 3×2 grid. Violet belongs only to the shape BEHIND them. */
+.vh-features {
+  min-height: 100svh;
+  padding: 125px 5vw 145px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #080808;
+}
+.vh-features-inner { width: min(100%, 1060px); margin: 0 auto; }
+.vh-features-title {
+  max-width: 740px;
+  margin: 0 auto 64px;
+  text-align: center;
+  font-size: clamp(2.6rem, 4.1vw, 3.65rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+.vh-features-scene { position: relative; isolation: isolate; }
+.vh-feature-shape {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  width: min(48vw, 470px);
+  height: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-3deg);
+}
+.vh-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+  position: relative;
+  z-index: 1;
+}
+.vh-feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  min-height: 290px;
+  padding: 40px 30px;
+  text-align: center;
+  border: 1px solid #252525;
+  border-radius: 15px;
+  background: #0d0d0d;
+}
+.vh-feature-card h3 {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.28vw, 1.25rem);
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+}
+.vh-feature-card p {
+  max-width: 245px;
+  margin: 0;
+  color: #888;
+  font-size: .93rem;
+  line-height: 1.7;
+}
+
+/* The progressive text reveal remains a separate, quiet moment after selected work. */
+.vh-statement-section { padding: clamp(130px, 17vw, 220px) 0; }
 .vh-statement {
   font-size: clamp(2.1rem, 4.8vw, 5.2rem);
   font-weight: 580;
   letter-spacing: -.055em;
   line-height: 1.2;
   max-width: 1130px;
-  margin: 0 0 clamp(100px,12vw,175px);
+  margin: 0;
 }
-.vh-text-word { color:#383838; }
-.vh-skills { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap: 55px 34px; }
-.vh-skill { border-top:1px solid var(--vh-line); padding-top:22px; }
-.vh-skill > span { color:#777; font-family:var(--font-mono); font-size:.7rem; }
-.vh-skill h3 { margin:30px 0 13px; font-size:clamp(1.2rem,1.8vw,1.5rem); font-weight:570; letter-spacing:-.03em; }
-.vh-skill p { margin:0; color:#888; line-height:1.75; font-size:.9rem; max-width:370px; }
+.vh-text-word { color: #383838; }
 
 /* Experience timeline: text, dividers, no cards. */
 .vh-experience { padding: 115px 0 160px; }
@@ -240,10 +300,14 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
   .vh-showcase-track { display:flex; flex-direction:column; width:auto; padding:0 24px; gap:18px; transform:none !important; will-change:auto; }
   .vh-project { width:100%; height:auto; min-height:400px; padding:30px; border-radius:18px; }
   .vh-project-main h3 { font-size:clamp(2rem,5.6vw,3rem); }
-  .vh-capabilities { padding:115px 0 90px; }
+  .vh-features { min-height: auto; padding: 115px 24px 120px; }
+  .vh-features-title { margin-bottom: 55px; font-size: clamp(2.45rem, 5.5vw, 3.5rem); }
+  .vh-features-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .vh-feature-card { min-height: 265px; padding: 32px 25px; }
+  .vh-feature-shape { width: min(65vw, 380px); }
   .vh-heading { margin:30px 0 60px; font-size:clamp(2.8rem,7vw,4.7rem); }
-  .vh-statement { font-size:clamp(2rem,6vw,3.6rem); margin-bottom:90px; }
-  .vh-skills { grid-template-columns:repeat(2,minmax(0,1fr)); gap:42px 26px; }
+  .vh-statement-section { padding: 125px 0; }
+  .vh-statement { font-size:clamp(2rem,6vw,3.6rem); }
   .vh-experience { padding:90px 0 120px; }
   .vh-job { grid-template-columns:1fr; gap:15px; padding:40px 0; }
   .vh-about { padding:70px 0 130px; }
@@ -256,8 +320,14 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
   .vh-project { padding:26px; }
   .vh-project-bottom { align-items:start; flex-direction:column; gap:18px; }
   .vh-tags { max-width:100%; }
-  .vh-skills { grid-template-columns:1fr; gap:32px; }
-  .vh-skill h3 { margin-top:20px; }
+  .vh-features { padding: 100px 24px; }
+  .vh-features-title { font-size: clamp(2.05rem, 7.7vw, 2.9rem); margin-bottom: 48px; }
+  .vh-features-desktop-break { display: none; }
+  .vh-features-grid { grid-template-columns: 1fr; gap: 16px; }
+  .vh-feature-card { min-height: 225px; padding: 30px 25px; gap: 19px; }
+  .vh-feature-card h3 { font-size: 1.2rem; }
+  .vh-feature-card p { max-width: 285px; }
+  .vh-feature-shape { width: min(88vw, 330px); opacity: .72; }
   .vh-about p { font-size:1rem; }
   .vh-contact h2 { font-size:clamp(3rem,10vw,4.8rem); }
   .vh-social-links { gap:18px; }
