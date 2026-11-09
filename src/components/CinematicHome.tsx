@@ -76,6 +76,20 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
         });
       });
 
+      gsap.from('.vh-feature-card', {
+        y: 60,
+        autoAlpha: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+        scrollTrigger: {
+          trigger: '.vh-features-grid',
+          start: 'top 75%',
+          once: true,
+        },
+      });
+
       if (statement.current) {
         gsap.to(statement.current.querySelectorAll('.vh-text-word'), {
           color: '#ededed',
@@ -137,9 +151,35 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
         </div>
       </section>
 
+      <section className='vh-features' id='capabilities' aria-labelledby='vh-capabilities-heading'>
+        <div className='vh-features-inner'>
+          <h2 className='vh-features-title vh-reveal' id='vh-capabilities-heading'>
+            {es ? <>Lo que importa va más<br className='vh-features-desktop-break' /> allá del código.</> : <>What matters goes<br className='vh-features-desktop-break' /> beyond the code.</>}
+          </h2>
+          <div className='vh-features-scene'>
+            <svg className='vh-feature-shape' viewBox='0 0 480 460' fill='none' aria-hidden='true' focusable='false'>
+              <path d='M240 10 440 152 428 361 250 450 25 352 44 164Z' fill='#b5a0e8' />
+              <path d='M240 10 440 152 348 298 240 205Z' fill='#d4c8fb' />
+              <path d='M240 10 240 205 44 164Z' fill='#c8b3f0' />
+              <path d='M44 164 240 205 176 355 25 352Z' fill='#ba8ddf' />
+              <path d='M240 205 348 298 250 450 176 355Z' fill='#c1a0ea' />
+              <path d='M348 298 440 152 428 361 250 450Z' fill='#d7ccfa' />
+            </svg>
+            <div className='vh-features-grid'>
+              {data.capabilitiesSection.items.map((item) => (
+                <article className='vh-feature-card' key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className='vh-intro vh-container' aria-labelledby='vh-intro-heading'>
         <div className='vh-section-meta vh-reveal'>
-          <span>01</span>
+          <span>02</span>
           <span>{data.projectsSection.eyebrow}</span>
         </div>
         <div className='vh-intro-grid vh-reveal'>
@@ -174,26 +214,10 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
         </div>
       </section>
 
-      <section className='vh-capabilities vh-container' id='capabilities' aria-labelledby='vh-capabilities-heading'>
-        <div className='vh-section-meta vh-reveal'>
-          <span>02</span>
-          <span>{data.nav.capabilities}</span>
-        </div>
-        <h2 className='vh-heading vh-reveal' id='vh-capabilities-heading'>
-          {es ? 'Más allá del código.' : 'Beyond the code.'}
-        </h2>
+      <section className='vh-statement-section vh-container' aria-label={es ? 'Mi enfoque' : 'My approach'}>
         <p className='vh-statement' ref={statement} aria-label={sentence}>
           {sentence.split(' ').map((word, index) => <span className='vh-text-word' key={index}>{word}{' '}</span>)}
         </p>
-        <div className='vh-skills'>
-          {data.capabilitiesSection.items.map((item, index) => (
-            <div className='vh-skill vh-reveal' key={item.title}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section className='vh-experience vh-container' id='experience' aria-labelledby='vh-experience-heading'>
