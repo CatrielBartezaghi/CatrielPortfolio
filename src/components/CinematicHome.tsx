@@ -157,14 +157,6 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
             {es ? <>Lo que importa va más<br className='vh-features-desktop-break' /> allá del código.</> : <>What matters goes<br className='vh-features-desktop-break' /> beyond the code.</>}
           </h2>
           <div className='vh-features-scene'>
-            <svg className='vh-feature-shape' viewBox='0 0 480 460' fill='none' aria-hidden='true' focusable='false'>
-              <path d='M240 10 440 152 428 361 250 450 25 352 44 164Z' fill='#b5a0e8' />
-              <path d='M240 10 440 152 348 298 240 205Z' fill='#d4c8fb' />
-              <path d='M240 10 240 205 44 164Z' fill='#c8b3f0' />
-              <path d='M44 164 240 205 176 355 25 352Z' fill='#ba8ddf' />
-              <path d='M240 205 348 298 250 450 176 355Z' fill='#c1a0ea' />
-              <path d='M348 298 440 152 428 361 250 450Z' fill='#d7ccfa' />
-            </svg>
             <div className='vh-features-grid'>
               {data.capabilitiesSection.items.map((item) => (
                 <article className='vh-feature-card' key={item.title}>
