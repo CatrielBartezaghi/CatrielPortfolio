@@ -148,7 +148,7 @@ export function CinematicHome({ data, language }: { data: PortfolioData; languag
         stagger: { each: 0.075, from: 'start' },
         ease: 'none',
       });
-      timeline.to({}, { duration: 0.35 });
+      timeline.to({ progress: 0 }, { progress: 1, duration: 0.35 });
 
       return () => {
         timeline.kill();
