@@ -127,6 +127,55 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
 }
 .vh-intro-grid p { color: #888; font-size: 1rem; line-height: 1.8; margin: 0; }
 
+/* One scroll story links selected work directly into the reading statement.
+   The visible transition is a crossfade inside one pin, not two competing pins. */
+.vh-story { position: relative; }
+.vh-story--enhanced {
+  height: 100svh;
+  min-height: 650px;
+  isolation: isolate;
+}
+.vh-story--enhanced .vh-showcase {
+  height: 100%;
+  min-height: 0;
+}
+.vh-story--enhanced .vh-statement-section {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  min-height: 0;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  padding-top: 90px;
+  padding-bottom: 60px;
+  pointer-events: none;
+}
+@media (min-width: 821px) {
+  /* Readable fallback when animations are disabled or the viewport is short. */
+  .vh-story:not(.vh-story--enhanced) .vh-showcase {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  .vh-story:not(.vh-story--enhanced) .vh-showcase-track {
+    width: min(100% - 10vw, 1350px);
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    transform: none !important;
+    will-change: auto;
+  }
+  .vh-story:not(.vh-story--enhanced) .vh-project {
+    width: 100%;
+    height: auto;
+    min-height: 440px;
+  }
+}
+
 /* Horizontal showcase: directly follows Velox's pinned-card composition. */
 .vh-showcase {
   position: relative;
@@ -354,17 +403,3 @@ body:has(.velox-home) footer > div { max-width: none; padding-inline: clamp(24px
   .vh-text-word { color: #ededed; }
 }
 
-@media (prefers-reduced-motion: reduce) and (min-width: 821px) {
-  .vh-showcase { height:auto; min-height:0; overflow:visible; }
-  .vh-showcase-track {
-    width:min(100% - 10vw,1350px);
-    margin:auto;
-    padding:0;
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:24px;
-    transform:none !important;
-    will-change:auto;
-  }
-  .vh-project { width:100%; height:auto; min-height:470px; }
-}
